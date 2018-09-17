@@ -1,53 +1,59 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package beans;
 
-/**
- *
- * @author Kevin
- */
-public class Figur {
-    private String name;
-    private int zugweite;
-    private ZugTyp zugtyp;
+import javax.swing.*;
+import java.awt.*;
 
-    public Figur(String name, int zugweite, ZugTyp zugtyp) {
-        this.name = name;
-        this.zugweite = zugweite;
-        this.zugtyp = zugtyp;
-    }
+public abstract class Figur {
 
-    public String getName() {
-        return name;
-    }
+  private int zugweite;
+  private Point pos;
+  private Icon bild;
+  private ZugTyp zugtyp;
 
-    public void setName(String name) {
-        this.name = name;
-    }
+  public Figur(int zugweite, ZugTyp zugtyp, int x, int y) {
+    this(zugweite, zugtyp, new Point(x, y));
+  }
 
-    public int getZugweite() {
-        return zugweite;
-    }
+  public Figur(int zugweite, ZugTyp zugtyp, Point pos) {
+    this.pos = pos;
+    this.zugweite = zugweite;
+    this.zugtyp = zugtyp;
+  }
 
-    public void setZugweite(int zugweite) {
-        this.zugweite = zugweite;
-    }
+  public Point getPos() {
+    return pos;
+  }
 
-    public ZugTyp getZugtyp() {
-        return zugtyp;
-    }
+  public void setPos(Point pos) {
+    this.pos = pos;
+  }
 
-    public void setZugtyp(ZugTyp zugtyp) {
-        this.zugtyp = zugtyp;
-    }
+  public Icon getBild() {
+    return bild;
+  }
 
-    @Override
-    public String toString() {
-        return "Figur{" + "name=" + name + ", zugweite=" + zugweite + ", zugtyp=" + zugtyp + '}';
-    }
-    
-    
+  public void setBild(Icon bild) {
+    this.bild = bild;
+  }
+
+  public int getZugweite() {
+    return zugweite;
+  }
+
+  public void setZugweite(int zugweite) {
+    this.zugweite = zugweite;
+  }
+
+  public ZugTyp getZugtyp() {
+    return zugtyp;
+  }
+
+  public void setZugtyp(ZugTyp zugtyp) {
+    this.zugtyp = zugtyp;
+  }
+
+  @Override
+  public String toString() {
+    return "Figur{" + "zugweite=" + zugweite + ", zugtyp=" + zugtyp + '}';
+  }
 }
