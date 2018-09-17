@@ -1,7 +1,6 @@
 package threads;
 
 import javazoom.jl.decoder.JavaLayerException;
-import javazoom.jl.player.Player;
 import javazoom.jl.player.advanced.AdvancedPlayer;
 
 import java.io.File;

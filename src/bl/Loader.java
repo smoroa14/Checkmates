@@ -14,7 +14,7 @@ public class Loader {
 
     try
     {
-      img = ImageIO.read(new File(System.getProperty("user.dir")+File.separator+"src"+File.separator+"res"+File.separator+filename));
+      img = ImageIO.read(new File(System.getProperty("user.dir")+File.separator+"src"+File.separator+"images"+File.separator+filename));
     }
     catch (IOException e)
     {
