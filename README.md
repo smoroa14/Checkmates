@@ -3,6 +3,7 @@
 InteliJ:
 
 -> Check out from Version Control
+
 -> GitHub
 -> URL: https://github.com/smoroa14/Checkmates
 -> Clone
