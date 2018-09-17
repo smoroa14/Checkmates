@@ -5,8 +5,13 @@
  */
 package GUI;
 
+import beans.Bauer;
+import beans.Figur;
+
 import javax.swing.*;
 import java.awt.*;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * @author rober
@@ -14,6 +19,8 @@ import java.awt.*;
 public class Main extends JFrame {
   //             x y
   private JLabel[][] felder;
+  private List<Figur> friendFigures;
+  private List<Figur> enemyFigures;
   private Container cont;
 
   public Main() {
@@ -41,6 +48,15 @@ public class Main extends JFrame {
     for (int y = 1; y < 9; y++) {
       felder[0][y].setText(y+"");
       felder[9][y].setText(y+"");
+    }
+
+    //Figur
+    friendFigures = new LinkedList<>();
+    enemyFigures = new LinkedList<>();
+
+    for (int x = 1; x < 9; x++) {
+      friendFigures.add(new Bauer());
+      enemyFigures.add(new Bauer());
     }
   }
 
