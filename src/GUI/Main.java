@@ -58,12 +58,14 @@ public class Main extends JFrame {
     enemyFigures = new LinkedList<>();
 
     for (int x = 1; x < 9; x++) {
-      Bauer b = new Bauer(x, 1);
+      int y = 2;
+      Bauer b = new Bauer(x, y);
       friendFigures.add(b);
-      felder[x][1].setIcon(b.getBild());
-      b = new Bauer(x, 8);
+      felder[x][y].setIcon(b.getBild());
+      y = 7;
+      b = new Bauer(x, y);
       enemyFigures.add(b);
-      felder[x][8].setIcon(b.getBild());
+      felder[x][y].setIcon(b.getBild());
     }
   }
 
