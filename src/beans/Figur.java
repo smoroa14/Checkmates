@@ -1,22 +1,53 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package beans;
 
-public abstract class Figur {
+/**
+ *
+ * @author Kevin
+ */
+public class Figur {
+    private String name;
+    private int zugweite;
+    private ZugTyp zugtyp;
 
-  public enum FigurTyp{
-    BAUER
-  }
+    public Figur(String name, int zugweite, ZugTyp zugtyp) {
+        this.name = name;
+        this.zugweite = zugweite;
+        this.zugtyp = zugtyp;
+    }
 
-  private FigurTyp typ;
+    public String getName() {
+        return name;
+    }
 
-  public Figur(FigurTyp typ) {
-    this.typ = typ;
-  }
+    public void setName(String name) {
+        this.name = name;
+    }
 
-  public FigurTyp getTyp() {
-    return typ;
-  }
+    public int getZugweite() {
+        return zugweite;
+    }
 
-  public void setTyp(FigurTyp typ) {
-    this.typ = typ;
-  }
+    public void setZugweite(int zugweite) {
+        this.zugweite = zugweite;
+    }
+
+    public ZugTyp getZugtyp() {
+        return zugtyp;
+    }
+
+    public void setZugtyp(ZugTyp zugtyp) {
+        this.zugtyp = zugtyp;
+    }
+
+    @Override
+    public String toString() {
+        return "Figur{" + "name=" + name + ", zugweite=" + zugweite + ", zugtyp=" + zugtyp + '}';
+    }
+    
+    
 }
