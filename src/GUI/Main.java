@@ -3,6 +3,7 @@ package GUI;
 
 import beans.figur.*;
 import bl.Loader;
+import bl.Zug;
 
 import javax.swing.*;
 import java.awt.*;
@@ -22,13 +23,14 @@ public class Main extends JFrame {
   private List<Figur> enemyFigures;
   private Container cont;
   private Point selectedFigure;
+  private Zug zug;
 
   public Main() {
     this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     this.setSize(500, 500);
     cont = this.getContentPane();
     cont.setLayout(new GridLayout(10, 10, 0, 0));
-
+    zug = new Zug(this);
     createFelder();
   }
 
@@ -92,6 +94,13 @@ public class Main extends JFrame {
     }*/
   }
 
+  public List<Figur> getAllFigures() {
+    List<Figur> all = new LinkedList<>();
+    all.addAll(friendFigures);
+    all.addAll(enemyFigures);
+    return all;
+  }
+
   public static void main(String[] args) {
     new Main().setVisible(true);
   }
@@ -110,9 +119,8 @@ public class Main extends JFrame {
       all.addAll(enemyFigures);
       for (Figur f : all) {
         if (f.getPos().equals(new Point(x, y))) {
-          if(selectedFigure != null)
-          {
-            if(selectedFigure.equals(f.getPos()))break;
+          if (selectedFigure != null) {
+            if (selectedFigure.equals(f.getPos())) break;
 
             BufferedImage img = setSelected((BufferedImage) ((ImageIcon) felder[selectedFigure.x][selectedFigure.y].getIcon()).getImage(), false);
             felder[selectedFigure.x][selectedFigure.y].setIcon(new ImageIcon(img));
@@ -120,11 +128,15 @@ public class Main extends JFrame {
           BufferedImage img = setSelected((BufferedImage) ((ImageIcon) lb.getIcon()).getImage(), true);
           lb.setIcon(new ImageIcon(img));
           selectedFigure = f.getPos();
+
+          List<Point> movements = zug.getMoeglicheZuege(f);
+
           break;
         }
       }
 
     }
+
 
     private BufferedImage setSelected(BufferedImage img, boolean selected) {
       int width = img.getWidth();
@@ -135,9 +147,9 @@ public class Main extends JFrame {
           int r = color.getRed();
           int g = color.getGreen();
           int b = color.getBlue();
-          if(selected){
+          if (selected) {
             color = color.darker();
-          }else {
+          } else {
             color = color.brighter();
           }
           img.setRGB(col, row, color.getRGB());
