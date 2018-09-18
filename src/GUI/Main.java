@@ -131,6 +131,12 @@ public class Main extends JFrame {
 
           List<Point> movements = zug.getMoeglicheZuege(f);
 
+          for (Point p:movements) {
+            felder[p.x][p.y].setIcon(Loader.loadImage("blue.png"));
+          }
+
+
+
           break;
         }
       }
