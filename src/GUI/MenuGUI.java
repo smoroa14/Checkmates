@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package gui;
+package GUI;
 
 import threads.SoundPlayer;
 import java.util.logging.Level;
@@ -37,7 +37,7 @@ public class MenuGUI extends javax.swing.JFrame {
         this.setUndecorated(true);
         initComponents();
         if (!player.isPlaying("Poker.mp3")) {
-            player.play("music", "Poker.mp3", true);
+            //player.play("music", "Poker.mp3", true);
         }
 
     }
@@ -121,8 +121,8 @@ public class MenuGUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void onLogout(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_onLogout
-        player.play("effect", "Select.mp3", false);
-        player.close("Poker.mp3");
+        //player.play("effect", "Select.mp3", false);
+        //player.close("Poker.mp3");
         try {
             //access.updateUser(u);
             LoginGUI logingui = new LoginGUI();
