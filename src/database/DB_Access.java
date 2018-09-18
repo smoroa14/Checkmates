@@ -35,4 +35,9 @@ public class DB_Access {
         em.persist(user);
         em.getTransaction().commit();
     }
+    
+    public boolean checkUser(User u)
+    {
+        return false;
+    }
 }
