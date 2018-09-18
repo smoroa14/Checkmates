@@ -31,6 +31,9 @@ public class Zug {
     for (Point p : richtungen) {
       for (int i = 1; i <= (f.getZugweite() < 0 ? 8 : f.getZugweite()); i++) {
         Point sprung = new Point(f.getPos().x + p.x * i, f.getPos().y + p.y * i);
+        if (sprung.x > 8 || sprung.x < 1 || sprung.y > 8 || sprung.y < 1) {
+          continue;
+        }
         if (isFigur(sprung)) {
           break;
         }

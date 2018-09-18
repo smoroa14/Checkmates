@@ -21,6 +21,7 @@ public class Main extends JFrame {
   private JLabel[][] felder;
   private List<Figur> friendFigures;
   private List<Figur> enemyFigures;
+  private List<Point> moeglicheZuege;
   private Container cont;
   private Point selectedFigure;
   private Zug zug;
@@ -124,15 +125,19 @@ public class Main extends JFrame {
 
             BufferedImage img = setSelected((BufferedImage) ((ImageIcon) felder[selectedFigure.x][selectedFigure.y].getIcon()).getImage(), false);
             felder[selectedFigure.x][selectedFigure.y].setIcon(new ImageIcon(img));
+            for (Point p : moeglicheZuege) {
+              felder[p.x][p.y].setIcon(null);
+              System.out.println(p.x + " - " + p.y + " | " + felder[p.x][p.y].getIcon());
+            }
           }
           BufferedImage img = setSelected((BufferedImage) ((ImageIcon) lb.getIcon()).getImage(), true);
           lb.setIcon(new ImageIcon(img));
           selectedFigure = f.getPos();
 
-          List<Point> movements = zug.getMoeglicheZuege(f);
+          moeglicheZuege = zug.getMoeglicheZuege(f);
 
-          for (Point p:movements) {
-            felder[p.x][p.y].setIcon(Loader.loadImage("blue.png"));
+          for (Point p : moeglicheZuege) {
+            felder[p.x][p.y].setIcon(Loader.loadImage("blau.png"));
           }
 
 
