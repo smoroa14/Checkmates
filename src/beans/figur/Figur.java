@@ -7,6 +7,7 @@ import java.awt.*;
 
 public abstract class Figur {
 
+  //Movement Vectors
   public final static Point NORTH = new Point(0,1);
   public final static Point SOUTH = new Point(0,-1);
   public final static Point WEST = new Point(-1,0);
