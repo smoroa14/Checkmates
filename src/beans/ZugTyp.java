@@ -13,5 +13,5 @@ public enum ZugTyp {
   GERADE,
   DAME,
   BAUER,
-  PFERD;
+  PFERD
 }

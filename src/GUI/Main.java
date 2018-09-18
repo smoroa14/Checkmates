@@ -34,7 +34,12 @@ public class Main extends JFrame {
     felder = new JLabel[10][10];
     for (int y = 0; y < 10; y++) {
       for (int x = 0; x < 10; x++) {
-        felder[x][y] = new JLabel();
+        if(x == 0 || x == 9 || y == 0 || y == 9)
+        {
+          felder[x][y] = new JLabel();
+        }else{
+          felder[x][y] = new ImageLabel();
+        }
         felder[x][y].isOpaque();
 
         felder[x][y].addMouseListener(new myMouseListener());
@@ -64,7 +69,7 @@ public class Main extends JFrame {
     List<Figur> all = new LinkedList<>();
     all.addAll(enemyFigures);
     all.addAll(friendFigures);
-    for (Figur f: all) {
+    for (Figur f : all) {
       felder[f.getPos().x][f.getPos().y].setIcon(f.getBild());
     }
   }
@@ -72,7 +77,17 @@ public class Main extends JFrame {
   @Override
   public void paint(Graphics g) {
     super.paint(g);
-
+    /*List<Figur> all = new LinkedList<>();
+    all.addAll(friendFigures);
+    all.addAll(enemyFigures);
+    System.out.println("scale");
+    for (Figur f : all) {
+      Point pos = f.getPos();
+      ImageLabel icon = (ImageLabel) f.getBild();
+      Image scaledImage = icon.getImage().getScaledInstance(felder[pos.x][pos.y].getWidth()+100, felder[pos.x][pos.y].getHeight()+100, Image.SCALE_SMOOTH);
+      icon = new ImageLabel(scaledImage);
+      f.setBild(icon);
+    }*/
   }
 
   public static void main(String[] args) {
