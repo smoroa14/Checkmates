@@ -11,6 +11,10 @@ import java.io.IOException;
 
 public class Loader {
 
+  static {
+    loadConfig();
+  }
+
   private static String src;
 
   public static void loadConfig()
@@ -39,5 +43,10 @@ public class Loader {
     }
 
     return new ImageIcon(img);
+  }
+
+  public void loadSpielfeld()
+  {
+
   }
 }
