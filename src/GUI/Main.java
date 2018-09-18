@@ -8,6 +8,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.image.BufferedImage;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -20,10 +21,11 @@ public class Main extends JFrame {
   private List<Figur> friendFigures;
   private List<Figur> enemyFigures;
   private Container cont;
+  private Point selectedFigure;
 
   public Main() {
     this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-    this.setSize(300, 300);
+    this.setSize(500, 500);
     cont = this.getContentPane();
     cont.setLayout(new GridLayout(10, 10, 0, 0));
 
@@ -34,12 +36,12 @@ public class Main extends JFrame {
     felder = new JLabel[10][10];
     for (int y = 0; y < 10; y++) {
       for (int x = 0; x < 10; x++) {
-        if(x == 0 || x == 9 || y == 0 || y == 9)
-        {
+        if (x == 0 || x == 9 || y == 0 || y == 9) {
           felder[x][y] = new JLabel();
-        }else{
+        } else {
           felder[x][y] = new ImageLabel();
         }
+        felder[x][y].setName(x + ";" + y);
         felder[x][y].isOpaque();
 
         felder[x][y].addMouseListener(new myMouseListener());
@@ -99,9 +101,54 @@ public class Main extends JFrame {
     @Override
     public void mouseClicked(MouseEvent e) {
       JLabel lb = (JLabel) e.getSource();
-      System.out.println(lb.getName());
-      lb.setBackground(Color.BLACK);
+      String[] arr = lb.getName().split(";");
+      int x = Integer.parseInt(arr[0]);
+      int y = Integer.parseInt(arr[1]);
 
+      List<Figur> all = new LinkedList<>();
+      all.addAll(friendFigures);
+      all.addAll(enemyFigures);
+      for (Figur f : all) {
+        if (f.getPos().equals(new Point(x, y))) {
+          if(selectedFigure != null)
+          {
+            if(selectedFigure.equals(f.getPos()))break;
+
+            BufferedImage img = setSelected((BufferedImage) ((ImageIcon) felder[selectedFigure.x][selectedFigure.y].getIcon()).getImage(), false);
+            felder[selectedFigure.x][selectedFigure.y].setIcon(new ImageIcon(img));
+          }
+          BufferedImage img = setSelected((BufferedImage) ((ImageIcon) lb.getIcon()).getImage(), true);
+          lb.setIcon(new ImageIcon(img));
+          selectedFigure = f.getPos();
+          break;
+        }
+      }
+
+    }
+
+    private BufferedImage setSelected(BufferedImage img, boolean selected) {
+      int width = img.getWidth();
+      int height = img.getHeight();
+      for (int col = 0; col < width; col++) {
+        for (int row = 0; row < height; row++) {
+          Color color = getColor(img, col, row);
+          int r = color.getRed();
+          int g = color.getGreen();
+          int b = color.getBlue();
+          if(selected){
+            color = color.darker();
+          }else {
+            color = color.brighter();
+          }
+          img.setRGB(col, row, color.getRGB());
+        }
+      }
+      return img;
+    }
+
+    public Color getColor(BufferedImage img, int col, int row) {
+      Color color = new Color(img.getRGB(col, row));
+      return color;
     }
 
     @Override
