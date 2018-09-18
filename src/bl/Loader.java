@@ -1,5 +1,7 @@
 package bl;
 
+import beans.figur.Figur;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -8,6 +10,8 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.LinkedList;
+import java.util.List;
 
 public class Loader {
 
@@ -16,6 +20,8 @@ public class Loader {
   }
 
   private static String src;
+  public static List<Figur> friendFigures = new LinkedList<>();
+  public static List<Figur> enemyFigures = new LinkedList<>();
 
   public static void loadConfig()
   {
@@ -45,8 +51,33 @@ public class Loader {
     return new ImageIcon(img);
   }
 
-  public void loadSpielfeld()
+  public static void loadSpielfeld()
   {
+    List<Figur> curList = enemyFigures;
+    String filename = System.getProperty("user.dir")+src+"res"+File.separator+"spielfeld.txt";
+    System.out.println("load: " + filename);
+    try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
+      for (int i = 0; br.ready() && i < 8; i++) {
+        String line = br.readLine();
+        if(i <= 1)
+        {
+          curList = enemyFigures;
+        }else if(i >= 6)
+        {
+          curList = friendFigures;
+        }
 
+        String[] parts = line.split(";");
+        if(parts.length >= 8)
+        {
+          for (int x = 1; x <= 8; x++) {
+            curList.add(Figur.getClassFromChar(parts[x-1].charAt(0), x, i+1));
+          }
+        }
+
+      }
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
   }
 }

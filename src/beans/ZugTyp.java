@@ -6,11 +6,12 @@
 package beans;
 
 /**
- *
  * @author Kevin
  */
 public enum ZugTyp {
-    SCHRAEG,
-    GERADE,
-    PFERD;
+  SCHRAEG,
+  GERADE,
+  DAME,
+  BAUER,
+  PFERD;
 }

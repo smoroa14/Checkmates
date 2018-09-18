@@ -7,6 +7,15 @@ import java.awt.*;
 
 public abstract class Figur {
 
+  public final static Point NORTH = new Point(0,1);
+  public final static Point SOUTH = new Point(0,-1);
+  public final static Point WEST = new Point(-1,0);
+  public final static Point EAST = new Point(1,0);
+  public final static Point NORTH_EAST = new Point(1,1);
+  public final static Point SOUTH_EAST = new Point(1,-1);
+  public final static Point SOUTH_WEST = new Point(-1,-1);
+  public final static Point NORD_WEST = new Point(-1,1);
+
   private int zugweite;
   private Point pos;
   private Icon bild;
@@ -59,8 +68,23 @@ public abstract class Figur {
     return "Figur{" + "zugweite=" + zugweite + ", zugtyp=" + zugtyp + '}';
   }
 
-  public void getClassFromChar(char c, int x, int y)
+  public static Figur getClassFromChar(char c, int x, int y)
   {
+    switch (c)
+    {
+      case 't':return new Turm(x, y);
+      case 'p':return new Pferd(x, y);
+      case 'l':return new Laeufer(x, y);
+      case 'd':return new Dame(x, y);
+      case 'k':return new Koenig(x, y);
+      default :return new Bauer(x, y);
+    }
+  }
 
+
+  public abstract Point[] getMoveDir();
+
+  public boolean equalsPos(Point pos) {
+    return pos.getX() == this.pos.getX() && pos.getY() == this.pos.getY();
   }
 }
