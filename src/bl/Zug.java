@@ -26,7 +26,12 @@ public class Zug {
   }
 
   public List<Point> getMoeglicheZuege(Figur f) {
-    Point[] richtungen = f.getMoveDir();
+    Point[] richtungen;
+    if (f.isYourSide()) {
+      richtungen = f.getMoveDir();
+    } else {
+      richtungen = f.getEnemyMoveDir();
+    }
     List<Point> spruenge = new LinkedList<>();
     for (Point p : richtungen) {
       for (int i = 1; i <= (f.getZugweite() < 0 ? 8 : f.getZugweite()); i++) {

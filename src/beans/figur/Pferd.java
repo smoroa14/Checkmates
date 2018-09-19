@@ -11,6 +11,11 @@ public class Pferd extends Figur {
     this.setBild(Loader.loadImage("pferd.png"));
   }
 
+  public Pferd(int x, int y, boolean yours) {
+    this(x, y);
+    this.setYourSide(yours);
+  }
+
   @Override
   public Point[] getMoveDir() {
     return new Point[]{

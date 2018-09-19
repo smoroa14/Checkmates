@@ -11,8 +11,29 @@ public class Bauer extends Figur {
     this.setBild(Loader.loadImage("bauer.png"));
   }
 
+  public Bauer(int x, int y, boolean yours) {
+    this(x, y);
+    this.setYourSide(yours);
+  }
+
   @Override
   public Point[] getMoveDir() {
     return new Point[]{NORTH};
   }
+
+  @Override
+  public Point[] getEnemyMoveDir() {
+    return new Point[]{SOUTH};
+  }
+
+  @Override
+  public Point[] getAttackDir() {
+    return new Point[]{NORTH_EAST, NORTH_WEST};
+  }
+
+  @Override
+  public Point[] getEnemyAttackDir() {
+    return new Point[]{SOUTH_EAST, SOUTH_WEST};
+  }
+
 }

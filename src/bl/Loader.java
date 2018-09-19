@@ -40,7 +40,7 @@ public class Loader {
     try
     {
       filename = System.getProperty("user.dir")+src+"images"+File.separator+filename;
-      System.out.println(filename);
+      //System.out.println(filename);
       img = ImageIO.read(new File(filename));
     }
     catch (IOException e)
@@ -59,19 +59,22 @@ public class Loader {
     try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
       for (int i = 0; br.ready() && i < 8; i++) {
         String line = br.readLine();
+        boolean yours = true;
         if(i <= 1)
         {
           curList = enemyFigures;
+          yours = false;
         }else if(i >= 6)
         {
           curList = friendFigures;
+          yours = true;
         }
 
         String[] parts = line.split(";");
         if(parts.length >= 8)
         {
           for (int x = 1; x <= 8; x++) {
-            curList.add(Figur.getClassFromChar(parts[x-1].charAt(0), x, i+1));
+            curList.add(Figur.getClassFromChar(parts[x-1].charAt(0), x, i+1, yours));
           }
         }
 

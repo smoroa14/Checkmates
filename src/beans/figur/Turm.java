@@ -11,6 +11,11 @@ public class Turm extends Figur {
     this.setBild(Loader.loadImage("turm.png"));
   }
 
+  public Turm(int x, int y, boolean yours) {
+    this(x, y);
+    this.setYourSide(yours);
+  }
+
   @Override
   public Point[] getMoveDir() {
     return new Point[]{NORTH, EAST, SOUTH, WEST};

@@ -11,9 +11,14 @@ public class Koenig extends Figur {
     this.setBild(Loader.loadImage("koenig.png"));
   }
 
+  public Koenig(int x, int y, boolean yours) {
+    this(x, y);
+    this.setYourSide(yours);
+  }
+
   @Override
   public Point[] getMoveDir() {
-    return new Point[]{NORTH_EAST, SOUTH_EAST, SOUTH_WEST, NORD_WEST,NORTH, EAST, SOUTH, WEST
+    return new Point[]{NORTH_EAST, SOUTH_EAST, SOUTH_WEST, NORTH_WEST,NORTH, EAST, SOUTH, WEST
     };
   }
 }

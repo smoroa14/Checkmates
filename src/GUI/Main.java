@@ -126,8 +126,7 @@ public class Main extends JFrame {
             BufferedImage img = setSelected((BufferedImage) ((ImageIcon) felder[selectedFigure.x][selectedFigure.y].getIcon()).getImage(), false);
             felder[selectedFigure.x][selectedFigure.y].setIcon(new ImageIcon(img));
             for (Point p : moeglicheZuege) {
-              felder[p.x][p.y].setIcon(null);
-              System.out.println(p.x + " - " + p.y + " | " + felder[p.x][p.y].getIcon());
+              felder[p.x][p.y].setIcon(Loader.loadImage("null.png"));
             }
           }
           BufferedImage img = setSelected((BufferedImage) ((ImageIcon) lb.getIcon()).getImage(), true);
@@ -139,8 +138,6 @@ public class Main extends JFrame {
           for (Point p : moeglicheZuege) {
             felder[p.x][p.y].setIcon(Loader.loadImage("blau.png"));
           }
-
-
 
           break;
         }

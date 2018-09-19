@@ -11,8 +11,13 @@ public class Laeufer extends Figur {
     this.setBild(Loader.loadImage("laeufer.png"));
   }
 
+  public Laeufer(int x, int y, boolean yours) {
+    this(x, y);
+    this.setYourSide(yours);
+  }
+
   @Override
   public Point[] getMoveDir() {
-    return new Point[]{NORTH_EAST, SOUTH_EAST, SOUTH_WEST, NORD_WEST};
+    return new Point[]{NORTH_EAST, SOUTH_EAST, SOUTH_WEST, NORTH_WEST};
   }
 }
