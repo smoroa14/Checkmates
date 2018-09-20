@@ -74,7 +74,9 @@ public class Loader {
         if(parts.length >= 8)
         {
           for (int x = 1; x <= 8; x++) {
-            curList.add(Figur.getClassFromChar(parts[x-1].charAt(0), x, i+1, yours));
+            Figur a = Figur.getClassFromChar(parts[x-1].charAt(0), x, i+1, yours);
+            if(a == null)continue;
+            curList.add(a);
           }
         }
 

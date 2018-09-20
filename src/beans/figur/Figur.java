@@ -96,8 +96,10 @@ public abstract class Figur {
         return new Dame(x, y, yours);
       case 'k':
         return new Koenig(x, y, yours);
-      default:
+      case 'b':
         return new Bauer(x, y, yours);
+      default:
+        return null;
     }
   }
 

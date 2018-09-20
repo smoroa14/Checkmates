@@ -24,6 +24,7 @@ public class Main extends JFrame {
   private List<Point> moeglicheZuege;
   private Container cont;
   private Point selectedFigure;
+  private Figur selected;
   private Zug zug;
 
   public Main() {
@@ -132,6 +133,7 @@ public class Main extends JFrame {
           BufferedImage img = setSelected((BufferedImage) ((ImageIcon) lb.getIcon()).getImage(), true);
           lb.setIcon(new ImageIcon(img));
           selectedFigure = f.getPos();
+          selected = f;
 
           moeglicheZuege = zug.getMoeglicheZuege(f);
 
@@ -139,7 +141,17 @@ public class Main extends JFrame {
             felder[p.x][p.y].setIcon(Loader.loadImage("blau.png"));
           }
 
-          break;
+          return;
+        }
+      }
+      for (Point p : moeglicheZuege) {
+        if (p.equals(new Point(x, y))) {
+          for (Point p2 : moeglicheZuege) {
+            felder[p2.x][p2.y].setIcon(Loader.loadImage("null.png"));
+          }
+          felder[selected.getPos().x][selected.getPos().y].setIcon(Loader.loadImage("null.png"));
+          felder[p.x][p.y].setIcon(selected.getBild());
+          selected.setPos(p);
         }
       }
 
