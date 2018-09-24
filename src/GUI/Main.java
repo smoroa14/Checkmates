@@ -42,7 +42,7 @@ public class Main extends JFrame {
       for (int x = 0; x < 10; x++) {
         if (x == 0 || x == 9 || y == 0 || y == 9) {
           felder[x][y] = new JLabel();
-          felder[x][y].setIcon(Loader.loadImage("null.png"));
+          //felder[x][y].setIcon(Loader.loadImage("null.png"));
         } else {
           felder[x][y] = new ImageLabel();
           ((ImageLabel) felder[x][y]).setIcon(Loader.loadImage("null.png"), "null.png");
@@ -130,8 +130,7 @@ public class Main extends JFrame {
           if (selectedFigure != null) {
             if (selectedFigure.equals(f.getPos())) break;
 
-            BufferedImage img = setSelected((BufferedImage) new ImageIcon(((ImageIcon) felder[selectedFigure.x][selectedFigure.y].getIcon()).getImage()).getImage(), false);
-            felder[selectedFigure.x][selectedFigure.y].setIcon(new ImageIcon(img));
+            if(felder[selectedFigure.x][selectedFigure.y] instanceof ImageLabel)((ImageLabel)felder[selectedFigure.x][selectedFigure.y]).setUnselected();
             for (Point p : moeglicheZuege) {
 
               if (felder[p.x][p.y] instanceof ImageLabel) {
@@ -139,11 +138,10 @@ public class Main extends JFrame {
               } else {
                 felder[p.x][p.y].setIcon(Loader.loadImage("null.png"));
               }
-              System.out.println(p.x + " | " + p.y + " null.png");
             }
           }
-          BufferedImage img = setSelected((BufferedImage) ((ImageIcon) lb.getIcon()).getImage(), true);
-          lb.setIcon(new ImageIcon(img));
+          if(lb instanceof ImageLabel)((ImageLabel)lb).setSelected();
+          System.out.println(lb.getIcon());
           selectedFigure = f.getPos();
           selected = f;
 
@@ -155,7 +153,6 @@ public class Main extends JFrame {
             } else {
               felder[p.x][p.y].setIcon(Loader.loadImage("blau.png"));
             }
-            System.out.println(p.x + " | " + p.y + " blau.png");
           }
 
           return;
@@ -174,7 +171,7 @@ public class Main extends JFrame {
             } else {
               felder[p2.x][p2.y].setIcon(Loader.loadImage("null.png"));
             }
-            System.out.println(p2.x + " | " + p2.y + " null.png");
+
           }
 
           // Bild Setzen
@@ -183,7 +180,6 @@ public class Main extends JFrame {
           } else {
             felder[p.x][p.y].setIcon(selected.getBild());
           }
-          System.out.println(p.x + " | " + p.y + " " + selected.getImage_name());
 
           // Bild entfernen
           if (felder[selected.getPos().x][selected.getPos().y] instanceof ImageLabel) {
@@ -191,58 +187,12 @@ public class Main extends JFrame {
           } else {
             felder[selected.getPos().x][selected.getPos().y].setIcon(Loader.loadImage("null.png"));
           }
-          System.out.println(selected.getPos().x + " | " + selected.getPos().y + " null.png");
 
           selected.setPos(p);
           moeglicheZuege.clear();
         }
       }
 
-      for (JLabel[] felde : felder) {
-        for (JLabel feld : felde) {
-          if (feld instanceof ImageLabel) {
-            String s = ((ImageLabel) feld).getIconName();
-            if (s.contains("null")) {
-              System.out.printf("%30s", feld.getIcon() + ", ");
-            }else{
-              System.out.printf("%30s", s + ", ");
-            }
-          } else {
-            System.out.printf("%30s", feld.getIcon() + ", ");
-          }
-        }
-        System.out.println();
-      }
-      System.out.println();
-      System.out.println();
-      System.out.println();
-
-    }
-
-
-    private BufferedImage setSelected(BufferedImage img, boolean selected) {
-      int width = img.getWidth();
-      int height = img.getHeight();
-      for (int col = 0; col < width; col++) {
-        for (int row = 0; row < height; row++) {
-          Color color = getColor(img, col, row);
-          int r = color.getRed();
-          int g = color.getGreen();
-          int b = color.getBlue();
-          if (selected) {
-            color = color.darker();
-          } else {
-            color = color.brighter();
-          }
-          img.setRGB(col, row, color.getRGB());
-        }
-      }
-      return img;
-    }
-
-    public Color getColor(BufferedImage img, int col, int row) {
-      Color color = new Color(img.getRGB(col, row));
-      return color;
     }
 
     @Override
