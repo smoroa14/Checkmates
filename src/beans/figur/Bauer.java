@@ -8,7 +8,7 @@ import java.awt.*;
 public class Bauer extends Figur {
   public Bauer(int x, int y) {
     super(1, ZugTyp.BAUER, x, y);
-    this.setBild(Loader.loadImage("bauer.png"));
+    this.setBild(Loader.loadImage("bauer.png"), "bauer.png");
   }
 
   public Bauer(int x, int y, boolean yours) {

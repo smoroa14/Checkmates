@@ -6,6 +6,7 @@ import java.awt.*;
 // created by wolf: https://stackoverflow.com/questions/10634417/image-resize-to-fit-on-jpanel
 public class ImageLabel extends JLabel{
   private Image _myimage;
+  private String name;
 
   public ImageLabel(String text){
     super(text);
@@ -15,12 +16,26 @@ public class ImageLabel extends JLabel{
     super();
   }
 
+  public void setIcon(Icon icon, String name) {
+    super.setIcon(icon);
+    this.name = name;
+    if (icon instanceof ImageIcon)
+    {
+      _myimage = ((ImageIcon) icon).getImage();
+    }
+  }
+
   public void setIcon(Icon icon) {
     super.setIcon(icon);
     if (icon instanceof ImageIcon)
     {
       _myimage = ((ImageIcon) icon).getImage();
     }
+  }
+
+  public String getIconName()
+  {
+    return name;
   }
 
   @Override

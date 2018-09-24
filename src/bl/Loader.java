@@ -12,6 +12,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 public class Loader {
 
@@ -20,6 +22,7 @@ public class Loader {
   }
 
   private static String src;
+  private static Map<String, ImageIcon> imageIconMap = new TreeMap<>();
   public static List<Figur> friendFigures = new LinkedList<>();
   public static List<Figur> enemyFigures = new LinkedList<>();
 
@@ -34,14 +37,19 @@ public class Loader {
 
   public static Icon loadImage(String filename)
   {
+    if(imageIconMap.containsKey(filename))
+    {
+      return imageIconMap.get(filename);
+    }
     loadConfig();
     BufferedImage img = null;
 
     try
     {
-      filename = System.getProperty("user.dir")+src+"images"+File.separator+filename;
+      String filepath = System.getProperty("user.dir")+src+"images"+File.separator+filename;
       //System.out.println(filename);
-      img = ImageIO.read(new File(filename));
+      img = ImageIO.read(new File(filepath));
+      imageIconMap.put(filename, new ImageIcon(img));
     }
     catch (IOException e)
     {

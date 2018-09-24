@@ -8,7 +8,7 @@ import java.awt.*;
 public class Turm extends Figur {
   public Turm(int x, int y) {
     super(-1, ZugTyp.GERADE, x, y);
-    this.setBild(Loader.loadImage("turm.png"));
+    this.setBild(Loader.loadImage("turm.png"), "turm.png");
   }
 
   public Turm(int x, int y, boolean yours) {

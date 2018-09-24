@@ -22,6 +22,7 @@ public abstract class Figur {
   private Icon bild;
   private ZugTyp zugtyp;
   private boolean yourSide;
+  private String image_name;
 
   public Figur(int zugweite, ZugTyp zugtyp, int x, int y) {
     this(zugweite, zugtyp, new Point(x, y));
@@ -57,6 +58,11 @@ public abstract class Figur {
 
   public Icon getBild() {
     return bild;
+  }
+
+  public void setBild(Icon bild, String name) {
+    this.bild = bild;
+    image_name = name;
   }
 
   public void setBild(Icon bild) {
@@ -120,5 +126,13 @@ public abstract class Figur {
 
   public boolean equalsPos(Point pos) {
     return pos.getX() == this.pos.getX() && pos.getY() == this.pos.getY();
+  }
+
+  public String getImage_name() {
+    return image_name;
+  }
+
+  public void setImage_name(String image_name) {
+    this.image_name = image_name;
   }
 }

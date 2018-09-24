@@ -8,7 +8,7 @@ import java.awt.*;
 public class Koenig extends Figur {
   public Koenig(int x, int y) {
     super(1, ZugTyp.GERADE, x, y);
-    this.setBild(Loader.loadImage("koenig.png"));
+    this.setBild(Loader.loadImage("koenig.png"), "koenig.png");
   }
 
   public Koenig(int x, int y, boolean yours) {

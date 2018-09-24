@@ -8,7 +8,7 @@ import java.awt.*;
 public class Pferd extends Figur {
   public Pferd(int x, int y) {
     super(1, ZugTyp.GERADE, x, y);
-    this.setBild(Loader.loadImage("pferd.png"));
+    this.setBild(Loader.loadImage("pferd.png"), "pferd.png");
   }
 
   public Pferd(int x, int y, boolean yours) {

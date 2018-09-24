@@ -8,7 +8,7 @@ import java.awt.*;
 public class Dame extends Figur {
   public Dame(int x, int y) {
     super(-1, ZugTyp.GERADE, x, y);
-    this.setBild(Loader.loadImage("dame.png"));
+    this.setBild(Loader.loadImage("dame.png"), "dame.png");
   }
 
   public Dame(int x, int y, boolean yours) {

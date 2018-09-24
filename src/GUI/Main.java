@@ -42,8 +42,10 @@ public class Main extends JFrame {
       for (int x = 0; x < 10; x++) {
         if (x == 0 || x == 9 || y == 0 || y == 9) {
           felder[x][y] = new JLabel();
+          felder[x][y].setIcon(Loader.loadImage("null.png"));
         } else {
           felder[x][y] = new ImageLabel();
+          ((ImageLabel) felder[x][y]).setIcon(Loader.loadImage("null.png"), "null.png");
         }
         felder[x][y].setName(x + ";" + y);
         felder[x][y].isOpaque();
@@ -76,7 +78,11 @@ public class Main extends JFrame {
     all.addAll(enemyFigures);
     all.addAll(friendFigures);
     for (Figur f : all) {
-      felder[f.getPos().x][f.getPos().y].setIcon(f.getBild());
+      if (felder[f.getPos().x][f.getPos().y] instanceof ImageLabel) {
+        ((ImageLabel) felder[f.getPos().x][f.getPos().y]).setIcon(f.getBild(), f.getImage_name());
+      } else {
+        felder[f.getPos().x][f.getPos().y].setIcon(f.getBild());
+      }
     }
   }
 
@@ -124,10 +130,16 @@ public class Main extends JFrame {
           if (selectedFigure != null) {
             if (selectedFigure.equals(f.getPos())) break;
 
-            BufferedImage img = setSelected((BufferedImage) ((ImageIcon) felder[selectedFigure.x][selectedFigure.y].getIcon()).getImage(), false);
+            BufferedImage img = setSelected((BufferedImage) new ImageIcon(((ImageIcon) felder[selectedFigure.x][selectedFigure.y].getIcon()).getImage()).getImage(), false);
             felder[selectedFigure.x][selectedFigure.y].setIcon(new ImageIcon(img));
             for (Point p : moeglicheZuege) {
-              felder[p.x][p.y].setIcon(Loader.loadImage("null.png"));
+
+              if (felder[p.x][p.y] instanceof ImageLabel) {
+                ((ImageLabel) felder[p.x][p.y]).setIcon(Loader.loadImage("null.png"), "null.png");
+              } else {
+                felder[p.x][p.y].setIcon(Loader.loadImage("null.png"));
+              }
+              System.out.println(p.x + " | " + p.y + " null.png");
             }
           }
           BufferedImage img = setSelected((BufferedImage) ((ImageIcon) lb.getIcon()).getImage(), true);
@@ -138,22 +150,72 @@ public class Main extends JFrame {
           moeglicheZuege = zug.getMoeglicheZuege(f);
 
           for (Point p : moeglicheZuege) {
-            felder[p.x][p.y].setIcon(Loader.loadImage("blau.png"));
+            if (felder[p.x][p.y] instanceof ImageLabel) {
+              ((ImageLabel) felder[p.x][p.y]).setIcon(Loader.loadImage("blau.png"), "blau.png");
+            } else {
+              felder[p.x][p.y].setIcon(Loader.loadImage("blau.png"));
+            }
+            System.out.println(p.x + " | " + p.y + " blau.png");
           }
 
           return;
         }
       }
+
+      // Alle Blau gefärbten Felder durchgehen
       for (Point p : moeglicheZuege) {
+        // Ob man auf das Blaue Feld geklickt hat
         if (p.equals(new Point(x, y))) {
+
+          // Alle blauen Felder entfernen
           for (Point p2 : moeglicheZuege) {
-            felder[p2.x][p2.y].setIcon(Loader.loadImage("null.png"));
+            if (felder[p2.x][p2.y] instanceof ImageLabel) {
+              ((ImageLabel) felder[p2.x][p2.y]).setIcon(Loader.loadImage("null.png"), "null.png");
+            } else {
+              felder[p2.x][p2.y].setIcon(Loader.loadImage("null.png"));
+            }
+            System.out.println(p2.x + " | " + p2.y + " null.png");
           }
-          felder[selected.getPos().x][selected.getPos().y].setIcon(Loader.loadImage("null.png"));
-          felder[p.x][p.y].setIcon(selected.getBild());
+
+          // Bild Setzen
+          if (felder[p.x][p.y] instanceof ImageLabel) {
+            ((ImageLabel) felder[p.x][p.y]).setIcon(selected.getBild(), selected.getImage_name());
+          } else {
+            felder[p.x][p.y].setIcon(selected.getBild());
+          }
+          System.out.println(p.x + " | " + p.y + " " + selected.getImage_name());
+
+          // Bild entfernen
+          if (felder[selected.getPos().x][selected.getPos().y] instanceof ImageLabel) {
+            ((ImageLabel) felder[selected.getPos().x][selected.getPos().y]).setIcon(Loader.loadImage("null.png"), "null.png");
+          } else {
+            felder[selected.getPos().x][selected.getPos().y].setIcon(Loader.loadImage("null.png"));
+          }
+          System.out.println(selected.getPos().x + " | " + selected.getPos().y + " null.png");
+
           selected.setPos(p);
+          moeglicheZuege.clear();
         }
       }
+
+      for (JLabel[] felde : felder) {
+        for (JLabel feld : felde) {
+          if (feld instanceof ImageLabel) {
+            String s = ((ImageLabel) feld).getIconName();
+            if (s.contains("null")) {
+              System.out.printf("%30s", feld.getIcon() + ", ");
+            }else{
+              System.out.printf("%30s", s + ", ");
+            }
+          } else {
+            System.out.printf("%30s", feld.getIcon() + ", ");
+          }
+        }
+        System.out.println();
+      }
+      System.out.println();
+      System.out.println();
+      System.out.println();
 
     }
 
