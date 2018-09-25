@@ -50,7 +50,6 @@ public class Client_Frame extends javax.swing.JFrame {
     private String userName;
     private Color userColor = Color.black;
 
-
     public String getUserUser() {
         return "Client user eins zwo michl krenn";
     }
@@ -59,7 +58,6 @@ public class Client_Frame extends javax.swing.JFrame {
         this.user = name;
         this.setTitle("Logged in as " + user);
     }*/
-
     public void setGast(boolean isGast) {
         this.gast = isGast;
         Random rand = new Random();
@@ -78,6 +76,7 @@ public class Client_Frame extends javax.swing.JFrame {
         liLeute = new javax.swing.JList<>();
         jScrollPane2 = new javax.swing.JScrollPane();
         taAusgabe = new javax.swing.JEditorPane();
+        jButton1 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         btconnect = new javax.swing.JMenuItem();
@@ -104,6 +103,14 @@ public class Client_Frame extends javax.swing.JFrame {
         jScrollPane2.setViewportView(taAusgabe);
 
         getContentPane().add(jScrollPane2, java.awt.BorderLayout.CENTER);
+
+        jButton1.setText("Do Send MSG");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton1, java.awt.BorderLayout.PAGE_START);
 
         jMenu1.setText("Options");
 
@@ -153,9 +160,10 @@ public class Client_Frame extends javax.swing.JFrame {
 //        }
 
         try {
-            
-            btconnect.setEnabled(false);
-            btdisconnect.setEnabled(true);
+
+            user = new UserClient(this);
+            user.sendRequests(name + " ", '+');
+            // System.out.println(name);
 
         } catch (Exception ex) {
 
@@ -169,7 +177,7 @@ public class Client_Frame extends javax.swing.JFrame {
 
     private void FensterZuMachen(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_FensterZuMachen
         try {
-            System.out.println(user +" hat fenster zugemacht");
+            System.out.println(name + " hat fenster zugemacht");
         } catch (Exception ex) {
             disonnectUser();
         }
@@ -179,6 +187,15 @@ public class Client_Frame extends javax.swing.JFrame {
     private void btdisconnectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btdisconnectActionPerformed
         disonnectUser();
     }//GEN-LAST:event_btdisconnectActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        System.out.println("ajjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj "+name);
+        try {
+            user.sendRequests(name + "", 'u');
+        } catch (IOException ex) {
+            Logger.getLogger(Client_Frame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -198,10 +215,8 @@ public class Client_Frame extends javax.swing.JFrame {
         }
     };
 
- 
-
     public void disonnectUser() {
-        
+
         btconnect.setEnabled(true);
         btdisconnect.setEnabled(false);
         try {
@@ -229,10 +244,13 @@ public class Client_Frame extends javax.swing.JFrame {
         System.out.println(user + " wurde hinzugefügt");
     }
 
-
     public void serverConnectionLost() {
         disonnectUser();
         JOptionPane.showMessageDialog(this, "Connection to server Lost :(, you were disconnected");
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public static void main(String args[]) {
@@ -272,6 +290,7 @@ public class Client_Frame extends javax.swing.JFrame {
     private javax.swing.JMenuItem btExit;
     private javax.swing.JMenuItem btconnect;
     private javax.swing.JMenuItem btdisconnect;
+    private javax.swing.JButton jButton1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;

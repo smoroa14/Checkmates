@@ -54,6 +54,11 @@ public class UserClient {
             pw.println("-!#!" + eingabe);
             pw.flush();
         }
+        if(operator == 'u'){
+        System.out.println("mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm "+eingabe);
+            pw.println("Zug123321"+eingabe);
+            pw.flush();
+        }
         if (operator == '§') {
             pw.println(username + "!§!" + eingabe);
             pw.flush();

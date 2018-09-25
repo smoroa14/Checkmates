@@ -34,11 +34,11 @@ public class ClientThread implements Runnable {
                 }
 
             }
-            if (line.contains("$$")) {
-                String[] splitted = line.split("\\$\\$");
-                System.out.println("ASASASASSASASAASSASA        " + line);
-                System.out.println(splitted[0] + ": " + splitted[1]);
-                gui.writeMsg(splitted[0] + ": " + splitted[1]);
+            if (line.contains("!!!!!")) {
+                System.out.println("--------------------------------drinnnnnnnnnnnnnnnnnnnnnnnnnneeeeeeeeeeeeeeeeeeeeeeeeee");
+                //String[] splitted = line.split("\\$\\$");
+                //System.out.println(splitted[0] + ": " + splitted[1]);
+                gui.writeMsg(line);
             }
         }
         System.out.println("Clientthread finished");

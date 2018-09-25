@@ -17,8 +17,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -54,11 +52,24 @@ public class ChessServer {
 
         }
     }
+    
+    public String getUsers() {
+        String guys = ";";
+        int help = 0;
+        for (String username : usernames) {
+            if (help++ != usernames.size() - 1) {
+                guys += username + ";";
+            } else {
+                guys += username;
+            }
+        }
+        System.out.println("Leute zurückgeben");
+        return guys;
+    }
 
-    /* public void manageUser(char operator, String user) throws NameAllreadyInException {
+     public void manageUser(char operator, String user) {
         if (operator == '+') {
             if (usernames.contains(user)) {
-                throw new NameAllreadyInException();
             }
             System.out.println("user: "+user);
             usernames.add(user);
@@ -67,7 +78,7 @@ public class ChessServer {
             usernames.remove(user);
             broadcast.remove(user);
         }
-    }*/
+    }
     private void log(String message) {
         System.out.println(message);
     }
@@ -133,12 +144,44 @@ public class ChessServer {
 
                     //User hinzufügen
                     if (line.contains("!#!")) {
+                        String[] splitted = line.split("!#!");
+                        if (splitted[0].toCharArray()[0] == '+') {
+                            manageUser('+', splitted[1]);
+                            //serverFrame.writeLog("User " + splitted[1] + " has been added");
 
-                    } else {
-                        System.out.println("test do hier");
+                            System.out.println("Usersize... :"+broadcast.size());
+                            for (String username : usernames) {
+                                PrintWriter pwr = broadcast.get(username);
+                               
+                                pwr.println("+!!" + getUsers());
+                                pwr.flush();
+                            }
+
+                            //System.out.println("Hinzufügen ---------" + getUsers());
+                        } else {
+                            manageUser('-', splitted[1]);
+                            //serverFrame.writeLog("User " + splitted[1] + " has been removed");
+
+                            for (String username : usernames) {
+                                PrintWriter pwr = broadcast.get(username);
+                                pwr.println("-!!" + splitted[1]);
+                                pwr.flush();
+                            }
+                           // System.out.println("Löschen  ----------" + getUsers());
+                        }
                     }
                     System.out.println(line);
-                    if (line.contains("UserInfo")) {
+                    if (line.contains("Zug123321")) {
+                        for (String username : usernames) {
+                            PrintWriter pwr = broadcast.get(username);
+                            String[] splitted = line.split("Zug123321");
+                            System.out.println("drrrrrrrrrrrrreeeeeeeeeeeeeeeeeeeeeeeeecccccccccccccccccckkkkkkkkkkkkkkkk");
+                            if(line.contains("!!!!!")){
+                                System.out.println("hilllllllllllllllllllllllllllfffffffffffffffffffeeeeeeeeeeeeeeeeeeeeeeeeeee");
+                            }
+                            pwr.println("!!!!!Zug von : " + splitted[1]);
+                            pwr.flush();
+                        }
 
                     }
 
