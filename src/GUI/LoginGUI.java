@@ -5,6 +5,7 @@
  */
 package GUI;
 
+import bl.Loader;
 import bl.LoginController;
 import java.awt.Color;
 import java.io.File;
@@ -19,7 +20,6 @@ import threads.SoundPlayer;
  */
 public class LoginGUI extends javax.swing.JFrame {
 
-    private String filepath = System.getProperty("User.dir") + File.separator + "src" + File.separator + "sound" + File.separator;
     private SoundPlayer player = SoundPlayer.getInstance();
     private LinkedList<User> spieler = new LinkedList<>();
     private LoginController login = new LoginController();
@@ -73,6 +73,8 @@ public class LoginGUI extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new java.awt.GridLayout(1, 2));
+
+        lbMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Schachclub.jpg"))); // NOI18N
         getContentPane().add(lbMenu);
 
         jPanel5.setBackground(new java.awt.Color(0, 0, 0));
@@ -235,12 +237,14 @@ public class LoginGUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void onExit(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_onExit
-        player.play("effect", filepath + "Select.mp3", false);
+        String sound = Loader.getSoundPath("Select.mp3");
+        player.play("effect", sound, false);
         System.exit(0);
     }//GEN-LAST:event_onExit
 
     private void onLogin(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_onLogin
-        player.play("effect",filepath + "Select.mp3", false);
+        String sound = Loader.getSoundPath("Select.mp3");
+        player.play("effect", sound, false);
         btLogin.setVisible(false);
         paLogin.setVisible(true);
         btRegister.setVisible(true);
@@ -248,7 +252,8 @@ public class LoginGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_onLogin
 
     private void onRealLogin(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_onRealLogin
-        player.play("effect",filepath + "Select.mp3", false);
+        String sound = Loader.getSoundPath("Select.mp3");
+        player.play("effect", sound, false);
         String user = tfLogin.getText();
         String password = new String(pfLogin.getPassword());
         try {
@@ -268,7 +273,8 @@ public class LoginGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_onRealLogin
 
     private void onRealRegister(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_onRealRegister
-        player.play("effect", filepath +"Select.mp3", false);
+        String sound = Loader.getSoundPath("Select.mp3");
+        player.play("effect", sound, false);
         try {
             String user = tfRegister.getText();
             String password = pfRegister.getText();
@@ -290,7 +296,8 @@ public class LoginGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_onRealRegister
 
     private void onRegister(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_onRegister
-        player.play("effect",filepath + "Select.mp3", false);
+        String sound = Loader.getSoundPath("Select.mp3");
+        player.play("effect", sound, false);
         btRegister.setVisible(false);
         paRegister.setVisible(true);
         btLogin.setVisible(true);
@@ -298,7 +305,8 @@ public class LoginGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_onRegister
 
     private void onLoginEnter(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_onLoginEnter
-        player.play("effect",filepath + "Select.mp3", false);
+        String sound = Loader.getSoundPath("Select.mp3");
+        player.play("effect", sound, false);
         String user = tfLogin.getText();
         String password = new String(pfLogin.getPassword());
         try {
@@ -318,7 +326,8 @@ public class LoginGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_onLoginEnter
 
     private void onRegisterEnter(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_onRegisterEnter
-        player.play("effect",filepath + "Select.mp3", false);
+        String sound = Loader.getSoundPath("Select.mp3");
+        player.play("effect", sound, false);
         try {
 
             String user = tfRegister.getText();
