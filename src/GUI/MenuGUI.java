@@ -58,6 +58,8 @@ public class MenuGUI extends javax.swing.JFrame {
     private void initComponents() {
 
         jButton4 = new javax.swing.JButton();
+        jPanel8 = new javax.swing.JPanel();
+        jButton3 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
@@ -72,11 +74,11 @@ public class MenuGUI extends javax.swing.JFrame {
         jPanel5 = new javax.swing.JPanel();
         jButton2 = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
-        jButton3 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         liRaum = new javax.swing.JList<>();
         jLabel6 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
+        jButton5 = new javax.swing.JButton();
         jPanel7 = new javax.swing.JPanel();
         lbName = new javax.swing.JLabel();
         lbGeld = new javax.swing.JLabel();
@@ -92,6 +94,17 @@ public class MenuGUI extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton4, java.awt.BorderLayout.SOUTH);
+
+        jPanel8.setLayout(new java.awt.BorderLayout());
+
+        jButton3.setFont(new java.awt.Font("Tahoma", 0, 48)); // NOI18N
+        jButton3.setText("Refresh");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                onRefresh(evt);
+            }
+        });
+        jPanel8.add(jButton3, java.awt.BorderLayout.SOUTH);
 
         jPanel1.setLayout(new java.awt.GridLayout(1, 2));
 
@@ -151,15 +164,6 @@ public class MenuGUI extends javax.swing.JFrame {
 
         jPanel6.setLayout(new java.awt.BorderLayout());
 
-        jButton3.setFont(new java.awt.Font("Tahoma", 0, 48)); // NOI18N
-        jButton3.setText("Refresh");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                onRefresh(evt);
-            }
-        });
-        jPanel6.add(jButton3, java.awt.BorderLayout.EAST);
-
         liRaum.setFont(new java.awt.Font("Tahoma", 0, 48)); // NOI18N
         liRaum.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
@@ -179,9 +183,20 @@ public class MenuGUI extends javax.swing.JFrame {
 
         jPanel1.add(jPanel5);
 
-        getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
+        jPanel8.add(jPanel1, java.awt.BorderLayout.CENTER);
+
+        getContentPane().add(jPanel8, java.awt.BorderLayout.CENTER);
 
         jPanel3.setLayout(new java.awt.BorderLayout());
+
+        jButton5.setFont(new java.awt.Font("Tahoma", 0, 48)); // NOI18N
+        jButton5.setText("Deck");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                onDeck(evt);
+            }
+        });
+        jPanel3.add(jButton5, java.awt.BorderLayout.EAST);
 
         jPanel7.setOpaque(false);
         jPanel7.setLayout(new java.awt.GridLayout(2, 1, 10, 10));
@@ -194,14 +209,14 @@ public class MenuGUI extends javax.swing.JFrame {
         lbGeld.setText("Elo:");
         jPanel7.add(lbGeld);
 
-        jPanel3.add(jPanel7, java.awt.BorderLayout.NORTH);
+        jPanel3.add(jPanel7, java.awt.BorderLayout.CENTER);
 
         jLabel1.setBackground(new java.awt.Color(255, 255, 255));
         jLabel1.setFont(new java.awt.Font("Eras Bold ITC", 0, 48)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Willkommen!");
         jLabel1.setOpaque(true);
-        jPanel3.add(jLabel1, java.awt.BorderLayout.CENTER);
+        jPanel3.add(jLabel1, java.awt.BorderLayout.SOUTH);
 
         getContentPane().add(jPanel3, java.awt.BorderLayout.PAGE_START);
 
@@ -272,6 +287,12 @@ public class MenuGUI extends javax.swing.JFrame {
 
     }//GEN-LAST:event_onRefresh
 
+    private void onDeck(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_onDeck
+        DeckGUI deckgui = new DeckGUI();
+        deckgui.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_onDeck
+
     /**
      * @param args the command line arguments
      */
@@ -312,6 +333,7 @@ public class MenuGUI extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -325,6 +347,7 @@ public class MenuGUI extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lbGeld;
     private javax.swing.JLabel lbName;
