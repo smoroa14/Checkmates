@@ -5,19 +5,21 @@ import bl.Loader;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.awt.image.ComponentColorModel;
+import java.awt.image.IndexColorModel;
 
 // created by wolf: https://stackoverflow.com/questions/10634417/image-resize-to-fit-on-jpanel
-public class ImageLabel extends JLabel{
+public class ImageLabel extends JLabel {
   private Image _myimage;
   private String name;
   private Icon unselected;
   private Icon selected;
 
-  public ImageLabel(String text){
+  public ImageLabel(String text) {
     super(text);
   }
 
-  public ImageLabel(){
+  public ImageLabel() {
     super();
   }
 
@@ -28,14 +30,12 @@ public class ImageLabel extends JLabel{
 
   public void setIcon(Icon icon) {
     super.setIcon(icon);
-    if (icon == null)
-    {
+    if (icon == null) {
       _myimage = null;
       this.revalidate();
       return;
     }
-    if (icon instanceof ImageIcon)
-    {
+    if (icon instanceof ImageIcon) {
       _myimage = ((ImageIcon) icon).getImage();
       this.revalidate();
     }
@@ -65,33 +65,38 @@ public class ImageLabel extends JLabel{
     this.setIcon(selected);
   }
 
-  public String getIconName()
-  {
+  public String getIconName() {
     return name;
   }
 
   @Override
-  public void paint(Graphics g){
+  public void paint(Graphics g) {
     g.drawImage(_myimage, 0, 0, this.getWidth(), this.getHeight(), null);
   }
 
   private BufferedImage setSelected(BufferedImage img, boolean selected) {
+
     int width = img.getWidth();
     int height = img.getHeight();
-    for (int col = 0; col < width; col++) {
-      for (int row = 0; row < height; row++) {
-        Color color = getColor(img, col, row);
-        int r = color.getRed();
-        int g = color.getGreen();
-        int b = color.getBlue();
-        if (selected) {
-          color = color.darker();
-        } else {
-          color = color.brighter();
-        }
-        img.setRGB(col, row, color.getRGB());
+
+    int[] pixels = img.getRGB(0, 0, width, height, null, 0, width);
+
+    for (int i = 0; i < pixels.length; i++) {
+      Color color = new Color(pixels[i]);
+      if (selected) {
+        color = color.darker();
+      } else {
+        color = color.brighter();
       }
+      int r = color.getRed();
+      int g = color.getGreen();
+      int b = color.getBlue();
+      int a = color.getAlpha();
+      //System.out.print(a + " | ");
+      pixels[i] = new Color(r, g, b, a).getRGB();
     }
+    //System.out.println();
+    img.setRGB(0, 0, width, height, pixels, 0, width);
     return img;
   }
 
