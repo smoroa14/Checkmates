@@ -65,9 +65,6 @@
               <SubComponents>
                 <Component class="javax.swing.JButton" name="btLogin">
                   <Properties>
-                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="0" green="0" red="0" type="rgb"/>
-                    </Property>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Eras Bold ITC" size="48" style="1"/>
                     </Property>
@@ -173,9 +170,6 @@
               <SubComponents>
                 <Component class="javax.swing.JButton" name="btRegister">
                   <Properties>
-                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="0" green="0" red="0" type="rgb"/>
-                    </Property>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Eras Bold ITC" size="48" style="1"/>
                     </Property>
@@ -319,9 +313,6 @@
             </Container>
             <Component class="javax.swing.JButton" name="jButton3">
               <Properties>
-                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="0" green="0" red="0" type="rgb"/>
-                </Property>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Eras Bold ITC" size="48" style="1"/>
                 </Property>

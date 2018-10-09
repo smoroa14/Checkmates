@@ -85,7 +85,6 @@ public class LoginGUI extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(0, 0, 0));
         jPanel2.setLayout(new java.awt.CardLayout());
 
-        btLogin.setBackground(new java.awt.Color(0, 0, 0));
         btLogin.setFont(new java.awt.Font("Eras Bold ITC", 1, 48)); // NOI18N
         btLogin.setText("Anmelden");
         btLogin.addActionListener(new java.awt.event.ActionListener() {
@@ -142,7 +141,6 @@ public class LoginGUI extends javax.swing.JFrame {
         jPanel3.setBackground(new java.awt.Color(0, 0, 0));
         jPanel3.setLayout(new java.awt.CardLayout());
 
-        btRegister.setBackground(new java.awt.Color(0, 0, 0));
         btRegister.setFont(new java.awt.Font("Eras Bold ITC", 1, 48)); // NOI18N
         btRegister.setText("Registrieren");
         btRegister.addActionListener(new java.awt.event.ActionListener() {
@@ -219,7 +217,6 @@ public class LoginGUI extends javax.swing.JFrame {
 
         jPanel1.add(jPanel3);
 
-        jButton3.setBackground(new java.awt.Color(0, 0, 0));
         jButton3.setFont(new java.awt.Font("Eras Bold ITC", 1, 48)); // NOI18N
         jButton3.setText("Beenden");
         jButton3.addActionListener(new java.awt.event.ActionListener() {

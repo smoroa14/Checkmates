@@ -5,6 +5,8 @@
  */
 package GUI;
 
+import beans.Raum;
+import java.util.LinkedList;
 import threads.SoundPlayer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -21,9 +23,9 @@ public class MenuGUI extends javax.swing.JFrame {
     private SoundPlayer player = SoundPlayer.getInstance();
     private String selgame = "Schach"; //Ausgewähltes Spiel
     private User u;
+    DefaultListModel<Raum> dlm = new DefaultListModel<>();
    
     //private DB_Access access = DB_Access.getInstance();
-
     public User getS() {
         return u;
     }
@@ -38,9 +40,7 @@ public class MenuGUI extends javax.swing.JFrame {
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         this.setUndecorated(true);
         initComponents();
-        if (!player.isPlaying("Poker.mp3")) {
-            //player.play("music", "Poker.mp3", true);
-        }
+        liRaum.setModel(dlm);
 
     }
 
@@ -148,6 +148,7 @@ public class MenuGUI extends javax.swing.JFrame {
         });
         jPanel5.add(jButton2, java.awt.BorderLayout.PAGE_END);
 
+        liRaum.setFont(new java.awt.Font("Tahoma", 0, 48)); // NOI18N
         jScrollPane1.setViewportView(liRaum);
 
         jPanel5.add(jScrollPane1, java.awt.BorderLayout.CENTER);
@@ -171,7 +172,7 @@ public class MenuGUI extends javax.swing.JFrame {
 
         jPanel3.add(jPanel7, java.awt.BorderLayout.NORTH);
 
-        jLabel1.setBackground(new java.awt.Color(153, 0, 0));
+        jLabel1.setBackground(new java.awt.Color(255, 255, 255));
         jLabel1.setFont(new java.awt.Font("Eras Bold ITC", 0, 48)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Willkommen!");
@@ -200,10 +201,13 @@ public class MenuGUI extends javax.swing.JFrame {
         String raumname = tfName.getText();
         String raumpasswort = tfPasswort.getText();
         int raumelo = Integer.parseInt(tfElo.getText());
+        Raum raum = new Raum(raumname, raumpasswort, raumelo);
+      
+        dlm.addElement(raum);
     }//GEN-LAST:event_onErstellen
 
     private void onBeitreten(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_onBeitreten
-  
+
     }//GEN-LAST:event_onBeitreten
 
     /**
@@ -260,7 +264,7 @@ public class MenuGUI extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lbGeld;
     private javax.swing.JLabel lbName;
-    private javax.swing.JList<String> liRaum;
+    private javax.swing.JList<Raum> liRaum;
     private javax.swing.JTextField tfElo;
     private javax.swing.JTextField tfName;
     private javax.swing.JTextField tfPasswort;
