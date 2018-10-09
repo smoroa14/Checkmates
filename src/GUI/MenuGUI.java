@@ -12,6 +12,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import pojos.User;
 
 /**
@@ -24,7 +25,10 @@ public class MenuGUI extends javax.swing.JFrame {
     private String selgame = "Schach"; //Ausgewähltes Spiel
     private User u;
     DefaultListModel<Raum> dlm = new DefaultListModel<>();
-   
+    LinkedList<Raum> raumlist = new LinkedList<>();
+    boolean used = false;
+    Raum selectedroom;
+
     //private DB_Access access = DB_Access.getInstance();
     public User getS() {
         return u;
@@ -66,10 +70,12 @@ public class MenuGUI extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         tfElo = new javax.swing.JTextField();
         jPanel5 = new javax.swing.JPanel();
-        jLabel6 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
+        jPanel6 = new javax.swing.JPanel();
+        jButton3 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         liRaum = new javax.swing.JList<>();
+        jLabel6 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
         lbName = new javax.swing.JLabel();
@@ -134,11 +140,6 @@ public class MenuGUI extends javax.swing.JFrame {
 
         jPanel5.setLayout(new java.awt.BorderLayout());
 
-        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 48)); // NOI18N
-        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel6.setText("Raum beitreten");
-        jPanel5.add(jLabel6, java.awt.BorderLayout.PAGE_START);
-
         jButton2.setFont(new java.awt.Font("Tahoma", 0, 48)); // NOI18N
         jButton2.setText("Beitreten");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -146,12 +147,35 @@ public class MenuGUI extends javax.swing.JFrame {
                 onBeitreten(evt);
             }
         });
-        jPanel5.add(jButton2, java.awt.BorderLayout.PAGE_END);
+        jPanel5.add(jButton2, java.awt.BorderLayout.SOUTH);
+
+        jPanel6.setLayout(new java.awt.BorderLayout());
+
+        jButton3.setFont(new java.awt.Font("Tahoma", 0, 48)); // NOI18N
+        jButton3.setText("Refresh");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                onRefresh(evt);
+            }
+        });
+        jPanel6.add(jButton3, java.awt.BorderLayout.EAST);
 
         liRaum.setFont(new java.awt.Font("Tahoma", 0, 48)); // NOI18N
+        liRaum.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                onSelect(evt);
+            }
+        });
         jScrollPane1.setViewportView(liRaum);
 
-        jPanel5.add(jScrollPane1, java.awt.BorderLayout.CENTER);
+        jPanel6.add(jScrollPane1, java.awt.BorderLayout.CENTER);
+
+        jPanel5.add(jPanel6, java.awt.BorderLayout.CENTER);
+
+        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 48)); // NOI18N
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel6.setText("Raum beitreten");
+        jPanel5.add(jLabel6, java.awt.BorderLayout.PAGE_START);
 
         jPanel1.add(jPanel5);
 
@@ -198,17 +222,55 @@ public class MenuGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_onLogout
 
     private void onErstellen(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_onErstellen
-        String raumname = tfName.getText();
-        String raumpasswort = tfPasswort.getText();
-        int raumelo = Integer.parseInt(tfElo.getText());
-        Raum raum = new Raum(raumname, raumpasswort, raumelo);
-      
-        dlm.addElement(raum);
+        try {
+            String raumname = tfName.getText();
+            String raumpasswort = tfPasswort.getText();
+            int raumelo = Integer.parseInt(tfElo.getText());
+            Raum raum = new Raum(raumname, raumpasswort, raumelo);
+
+            for (Raum raum1 : raumlist) {
+                if (raum.getName().equals(raum1.getName())) {
+                    used = true;
+                }
+            }
+            if (used == false) {
+                raumlist.add(raum);
+                dlm.addElement(raum);
+            }
+            used = false;
+
+        } catch (NumberFormatException e) {
+            System.out.println("ein Feld ist leer");
+        }
+
     }//GEN-LAST:event_onErstellen
 
     private void onBeitreten(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_onBeitreten
+        String eingabe = "";
+        try {
+            if (!selectedroom.getPasswort().equals("")) {
+                eingabe = JOptionPane.showInputDialog("Raum-Passwort benötigt:");
+            } else {
+                if (eingabe.equals(selectedroom.getPasswort())) {
+                    Main maingui = new Main();
+                    maingui.setVisible(true);
+                    this.dispose();
+                }
+            }
+        } catch (NullPointerException e) {
+            System.out.println("Es ist kein Raum ausgewählt!");
+        }
 
     }//GEN-LAST:event_onBeitreten
+
+    private void onSelect(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_onSelect
+        int index = liRaum.getSelectedIndex();
+        selectedroom = dlm.get(index);
+    }//GEN-LAST:event_onSelect
+
+    private void onRefresh(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_onRefresh
+
+    }//GEN-LAST:event_onRefresh
 
     /**
      * @param args the command line arguments
@@ -248,6 +310,7 @@ public class MenuGUI extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -260,6 +323,7 @@ public class MenuGUI extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lbGeld;
