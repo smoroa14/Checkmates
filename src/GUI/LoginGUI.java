@@ -6,9 +6,8 @@
 package GUI;
 
 import bl.Loader;
-import bl.LoginController;
+import database.DB_Access;
 import java.awt.Color;
-import java.io.File;
 import java.util.LinkedList;
 import javax.swing.JFrame;
 import pojos.User;
@@ -22,12 +21,13 @@ public class LoginGUI extends javax.swing.JFrame {
 
     private SoundPlayer player = SoundPlayer.getInstance();
     private LinkedList<User> spieler = new LinkedList<>();
-    private LoginController login = new LoginController();
+    private DB_Access access = new DB_Access();
 
     public LoginGUI() {
 
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         this.setUndecorated(true);
+        access.connect();
         initComponents();
         paRegister.setVisible(false);
         paLogin.setVisible(false);
@@ -254,7 +254,7 @@ public class LoginGUI extends javax.swing.JFrame {
         String user = tfLogin.getText();
         String password = new String(pfLogin.getPassword());
         try {
-            User u = login.checkLogin(user, password);
+            User u = access.getUser(user, password);
             if (u != null) {
                 MenuGUI menugui = new MenuGUI();
                 menugui.setS(u);
@@ -276,7 +276,10 @@ public class LoginGUI extends javax.swing.JFrame {
             String user = tfRegister.getText();
             String password = pfRegister.getText();
             String password2 = pfRegister2.getText();
-            User u = login.checkRegistration(user, "", "");
+            User u = null;
+            if(access.insertUser(user, password, password2)){
+                u = access.getUser(user, password);
+            }
             if (u != null) {
                 MenuGUI menugui = new MenuGUI();
                 menugui.setS(u);
@@ -307,7 +310,7 @@ public class LoginGUI extends javax.swing.JFrame {
         String user = tfLogin.getText();
         String password = new String(pfLogin.getPassword());
         try {
-            User u = login.checkLogin(user, password);
+            User u = access.getUser(user, password);
             if (u != null) {
                 MenuGUI menugui = new MenuGUI();
                 menugui.setS(u);
@@ -330,7 +333,10 @@ public class LoginGUI extends javax.swing.JFrame {
             String user = tfRegister.getText();
             String password = pfRegister.getText();
             String password2 = pfRegister2.getText();
-            User u = login.checkRegistration(user, "", "");
+            User u = null;
+            if(access.insertUser(user, password, password2)){
+                u = access.getUser(user, password);
+            }
             if (u != null) {
                 MenuGUI menugui = new MenuGUI();
                 menugui.setS(u);

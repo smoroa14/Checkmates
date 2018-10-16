@@ -5,25 +5,36 @@
  */
 package pojos;
 
+import java.io.Serializable;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 
 /**
  *
  * @author micha
  */
 @Entity
-public class User {
+@NamedQueries({
+    @NamedQuery(name = "User.findAll", query = "SELECT u FROM User u")
+   ,@NamedQuery(name = "User.getUser", query = "SELECT u FROM User u WHERE u.username = :username AND u.password = :password")
+})
+public class User implements Serializable{
+
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
     private String username;
     private String password;
-    private int mmr;
+    private Long mmr;
 
     public User() {
     }
 
-    public User(String username, String password, int mmr) {
+    public User(String username, String password, Long mmr) {
         this.username = username;
         this.password = password;
         this.mmr = mmr;
@@ -53,11 +64,11 @@ public class User {
         this.password = password;
     }
 
-    public int getMmr() {
+    public Long getMmr() {
         return mmr;
     }
 
-    public void setMmr(int mmr) {
+    public void setMmr(Long mmr) {
         this.mmr = mmr;
     }
 
