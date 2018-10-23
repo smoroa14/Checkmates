@@ -21,12 +21,13 @@ public class LoginGUI extends javax.swing.JFrame {
 
     private SoundPlayer player = SoundPlayer.getInstance();
     private LinkedList<Player> spieler = new LinkedList<>();
-    private DB_Access access = new DB_Access();
+    private DB_Access access;
 
     public LoginGUI() {
 
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         this.setUndecorated(true);
+        access = DB_Access.getInstance();
         access.connect();
         initComponents();
         paRegister.setVisible(false);
@@ -277,7 +278,7 @@ public class LoginGUI extends javax.swing.JFrame {
             String password = pfRegister.getText();
             String password2 = pfRegister2.getText();
             Player u = null;
-            if(access.insertUser(user, password, password2)){
+            if (access.insertUser(user, password, password2)) {
                 u = access.getUser(user, password);
             }
             if (u != null) {
@@ -334,7 +335,7 @@ public class LoginGUI extends javax.swing.JFrame {
             String password = pfRegister.getText();
             String password2 = pfRegister2.getText();
             Player u = null;
-            if(access.insertUser(user, password, password2)){
+            if (access.insertUser(user, password, password2)) {
                 u = access.getUser(user, password);
             }
             if (u != null) {
