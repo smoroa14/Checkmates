@@ -10,7 +10,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
-import pojos.User;
+import pojos.Player;
 
 /**
  *
@@ -34,15 +34,15 @@ public class DB_Access {
     public boolean insertUser(String username, String password1, String password2) {
         try {
             if (password1.equals(password2)) {
-                TypedQuery<User> users = em.createNamedQuery("User.findAll", User.class);
-                List<User> usersList = users.getResultList();
-                for (User user : usersList) {
+                TypedQuery<Player> users = em.createNamedQuery("Player.findAll", Player.class);
+                List<Player> usersList = users.getResultList();
+                for (Player user : usersList) {
                     if(user.getUsername().equals(username))
                     {
                         return false;
                     }
                 }
-                User user = new User(username, password1, 1000L);
+                Player user = new Player(username, password1, 1000L);
                 em.getTransaction().begin();
                 em.persist(user);
                 em.getTransaction().commit();
@@ -56,11 +56,11 @@ public class DB_Access {
         }
     }
 
-    public User getUser(String username, String password) {
-        TypedQuery<User> user = em.createNamedQuery("User.getUser", User.class);
+    public Player getUser(String username, String password) {
+        TypedQuery<Player> user = em.createNamedQuery("Player.getPlayer", Player.class);
         user.setParameter("username", username);
         user.setParameter("password", password);
-        List<User> userList = user.getResultList();
+        List<Player> userList = user.getResultList();
         if(userList != null)
         {
             return userList.get(0);

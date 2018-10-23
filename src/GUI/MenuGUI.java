@@ -13,7 +13,7 @@ import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import pojos.User;
+import pojos.Player;
 
 /**
  *
@@ -23,18 +23,18 @@ public class MenuGUI extends javax.swing.JFrame {
 
     private SoundPlayer player = SoundPlayer.getInstance();
     private String selgame = "Schach"; //Ausgewähltes Spiel
-    private User u;
+    private Player u;
     DefaultListModel<Raum> dlm = new DefaultListModel<>();
     LinkedList<Raum> raumlist = new LinkedList<>();
     boolean used = false;
     Raum selectedroom;
 
     //private DB_Access access = DB_Access.getInstance();
-    public User getS() {
+    public Player getS() {
         return u;
     }
 
-    public void setS(User u) {
+    public void setS(Player u) {
         this.u = u;
         lbName.setText("Name: " + u.getUsername());
         lbGeld.setText("Elo: " + String.format("%,.02f", u.getMmr()));

@@ -12,17 +12,19 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 
 /**
  *
  * @author micha
  */
 @Entity
+@Table(name = "player")
 @NamedQueries({
-    @NamedQuery(name = "User.findAll", query = "SELECT u FROM User u")
-   ,@NamedQuery(name = "User.getUser", query = "SELECT u FROM User u WHERE u.username = :username AND u.password = :password")
+    @NamedQuery(name = "Player.findAll", query = "SELECT p FROM Player p")
+   ,@NamedQuery(name = "Player.getPlayer", query = "SELECT p FROM Player p WHERE p.username = :username AND p.password = :password")
 })
-public class User implements Serializable{
+public class Player implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -31,10 +33,10 @@ public class User implements Serializable{
     private String password;
     private Long mmr;
 
-    public User() {
+    public Player() {
     }
 
-    public User(String username, String password, Long mmr) {
+    public Player(String username, String password, Long mmr) {
         this.username = username;
         this.password = password;
         this.mmr = mmr;

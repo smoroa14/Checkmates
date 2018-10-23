@@ -10,7 +10,7 @@ import database.DB_Access;
 import java.awt.Color;
 import java.util.LinkedList;
 import javax.swing.JFrame;
-import pojos.User;
+import pojos.Player;
 import threads.SoundPlayer;
 
 /**
@@ -20,7 +20,7 @@ import threads.SoundPlayer;
 public class LoginGUI extends javax.swing.JFrame {
 
     private SoundPlayer player = SoundPlayer.getInstance();
-    private LinkedList<User> spieler = new LinkedList<>();
+    private LinkedList<Player> spieler = new LinkedList<>();
     private DB_Access access = new DB_Access();
 
     public LoginGUI() {
@@ -254,7 +254,7 @@ public class LoginGUI extends javax.swing.JFrame {
         String user = tfLogin.getText();
         String password = new String(pfLogin.getPassword());
         try {
-            User u = access.getUser(user, password);
+            Player u = access.getUser(user, password);
             if (u != null) {
                 MenuGUI menugui = new MenuGUI();
                 menugui.setS(u);
@@ -276,7 +276,7 @@ public class LoginGUI extends javax.swing.JFrame {
             String user = tfRegister.getText();
             String password = pfRegister.getText();
             String password2 = pfRegister2.getText();
-            User u = null;
+            Player u = null;
             if(access.insertUser(user, password, password2)){
                 u = access.getUser(user, password);
             }
@@ -310,7 +310,7 @@ public class LoginGUI extends javax.swing.JFrame {
         String user = tfLogin.getText();
         String password = new String(pfLogin.getPassword());
         try {
-            User u = access.getUser(user, password);
+            Player u = access.getUser(user, password);
             if (u != null) {
                 MenuGUI menugui = new MenuGUI();
                 menugui.setS(u);
@@ -333,7 +333,7 @@ public class LoginGUI extends javax.swing.JFrame {
             String user = tfRegister.getText();
             String password = pfRegister.getText();
             String password2 = pfRegister2.getText();
-            User u = null;
+            Player u = null;
             if(access.insertUser(user, password, password2)){
                 u = access.getUser(user, password);
             }
