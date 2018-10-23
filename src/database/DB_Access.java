@@ -10,6 +10,7 @@ import java.util.Objects;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import pojos.Player;
 
@@ -80,6 +81,13 @@ public class DB_Access {
         return null;
     }
 
+    public void saveDeck(String[] deck, String username){
+        Query updateDeck = em.createNamedQuery("Player.updateDeck");
+        updateDeck.setParameter("deck", deck);
+        updateDeck.setParameter("username", username);
+        updateDeck.executeUpdate();
+    }
+    
     private int getHashOfString(String str) {
         int hash = 7;
         hash = 97 * hash + Objects.hashCode(str);
