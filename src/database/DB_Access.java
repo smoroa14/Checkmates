@@ -20,6 +20,19 @@ public class DB_Access {
 
     private EntityManagerFactory emf;
     private EntityManager em;
+    
+    public static DB_Access theInstance = null;
+
+    public static DB_Access getInstance() {
+        if (theInstance == null) {
+            theInstance = new DB_Access();
+        }
+        return theInstance;
+    }
+
+    private DB_Access() {
+
+    }
 
     public void connect() {
         emf = Persistence.createEntityManagerFactory("CheckMatesPU");
@@ -66,12 +79,5 @@ public class DB_Access {
             return userList.get(0);
         }
         return null;
-    }
-    
-    public static void main(String[] args) {
-        DB_Access access = new DB_Access();
-        access.connect();
-        System.out.println("Test");
-        access.disconnect();
     }
 }

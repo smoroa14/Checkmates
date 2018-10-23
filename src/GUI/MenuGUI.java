@@ -37,7 +37,7 @@ public class MenuGUI extends javax.swing.JFrame {
     public void setS(Player u) {
         this.u = u;
         lbName.setText("Name: " + u.getUsername());
-        lbGeld.setText("Elo: " + String.format("%,.02f", u.getMmr()));
+        lbGeld.setText("Elo: " + u.getMmr());
     }
 
     public MenuGUI() {
