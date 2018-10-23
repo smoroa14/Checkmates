@@ -40,10 +40,15 @@ public class Main extends JFrame {
     for (int y = 0; y < 10; y++) {
       for (int x = 0; x < 10; x++) {
         if (x == 0 || x == 9 || y == 0 || y == 9) {
-          felder[x][y] = new JLabel();
+          felder[x][y] = new BorderLabel();
+          felder[x][y].setForeground(Color.LIGHT_GRAY.brighter());
           //felder[x][y].setIcon(Loader.loadImage("null.png"));
         } else {
           felder[x][y] = new ImageLabel();
+          if((x+y-2) % 2 == 0)
+          {
+            ((ImageLabel) felder[x][y]).setColor(new Color(101, 62, 29).brighter());
+          }
           ((ImageLabel) felder[x][y]).setIcon(Loader.loadImage("null.png"), "null.png");
         }
         felder[x][y].setName(x + ";" + y);
@@ -140,7 +145,6 @@ public class Main extends JFrame {
             }
           }
           if(lb instanceof ImageLabel)((ImageLabel)lb).setSelected();
-          System.out.println(lb.getIcon());
           selectedFigure = f.getPos();
           selected = f;
 

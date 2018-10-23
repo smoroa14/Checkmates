@@ -35,10 +35,10 @@ public class Loader {
   }
 
   public static Icon loadImage(String filename) {
-        /*if(filename.equalsIgnoreCase("null.png"))
+    if(filename.equalsIgnoreCase("null.png"))
     {
       return null;
-    }*/
+    }
     if (imageIconMap.containsKey(filename)) {
       return imageIconMap.get(filename);
     }
@@ -57,7 +57,7 @@ public class Loader {
 
     int width = img.getWidth();
     int height = img.getHeight();
-
+/*
     int[] pixels = img.getRGB(0, 0, width, height, null, 0, width);
 
     for (int i = 0; i < pixels.length; i++) {
@@ -70,14 +70,13 @@ public class Loader {
       pixels[i] = new Color(r, g, b, a).getRGB();
     }
     System.out.println();
-
+*/
     return new ImageIcon(img);
   }
 
   public static void loadSpielfeld() {
     List<Figur> curList = enemyFigures;
     String filename = System.getProperty("user.dir") + src + "res" + File.separator + "spielfeld.txt";
-    System.out.println("load: " + filename);
     try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
       for (int i = 0; br.ready() && i < 8; i++) {
         String line = br.readLine();
