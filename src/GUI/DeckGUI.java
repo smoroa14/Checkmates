@@ -5,6 +5,7 @@
  */
 package GUI;
 
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 
 /**
@@ -17,8 +18,8 @@ public class DeckGUI extends javax.swing.JFrame {
      * Creates new form DeckGUI
      */
     public DeckGUI() {
-        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        this.setUndecorated(true);
+//        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+//        this.setUndecorated(true);
         initComponents();
 
     }
@@ -38,29 +39,29 @@ public class DeckGUI extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jPanel10 = new javax.swing.JPanel();
-        jComboBox24 = new javax.swing.JComboBox<>();
-        jLabel9 = new javax.swing.JLabel();
+        cb1 = new javax.swing.JComboBox<>();
+        lb1 = new javax.swing.JLabel();
         jPanel9 = new javax.swing.JPanel();
-        jComboBox23 = new javax.swing.JComboBox<>();
-        jLabel8 = new javax.swing.JLabel();
+        cb2 = new javax.swing.JComboBox<>();
+        lb2 = new javax.swing.JLabel();
         jPanel8 = new javax.swing.JPanel();
-        jComboBox22 = new javax.swing.JComboBox<>();
-        jLabel7 = new javax.swing.JLabel();
+        cb3 = new javax.swing.JComboBox<>();
+        lb3 = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
-        jComboBox21 = new javax.swing.JComboBox<>();
-        jLabel6 = new javax.swing.JLabel();
+        cb4 = new javax.swing.JComboBox<>();
+        lb4 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
-        jComboBox20 = new javax.swing.JComboBox<>();
-        jLabel5 = new javax.swing.JLabel();
+        cb5 = new javax.swing.JComboBox<>();
+        lb5 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
-        jComboBox19 = new javax.swing.JComboBox<>();
-        jLabel4 = new javax.swing.JLabel();
+        cb6 = new javax.swing.JComboBox<>();
+        lb6 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
-        jComboBox18 = new javax.swing.JComboBox<>();
-        jLabel3 = new javax.swing.JLabel();
+        cb7 = new javax.swing.JComboBox<>();
+        lb7 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
-        jComboBox17 = new javax.swing.JComboBox<>();
-        jLabel2 = new javax.swing.JLabel();
+        cb8 = new javax.swing.JComboBox<>();
+        lb8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -72,6 +73,11 @@ public class DeckGUI extends javax.swing.JFrame {
 
         jButton2.setFont(new java.awt.Font("Tahoma", 0, 48)); // NOI18N
         jButton2.setText("Abbrechen");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                onAbbrechen(evt);
+            }
+        });
         jPanel2.add(jButton2);
 
         getContentPane().add(jPanel2, java.awt.BorderLayout.SOUTH);
@@ -86,104 +92,160 @@ public class DeckGUI extends javax.swing.JFrame {
         jPanel10.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel10.setLayout(new java.awt.BorderLayout());
 
-        jComboBox24.setFont(new java.awt.Font("Tahoma", 0, 48)); // NOI18N
-        jComboBox24.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Bauer", "Läufer", "Dame", "König", "Springer", "Turm", "Agent" }));
-        jPanel10.add(jComboBox24, java.awt.BorderLayout.PAGE_END);
+        cb1.setFont(new java.awt.Font("Tahoma", 0, 48)); // NOI18N
+        cb1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Bauer", "Läufer", "Dame", "König", "Springer", "Turm", "Agent" }));
+        cb1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                onSelect(evt);
+            }
+        });
+        jPanel10.add(cb1, java.awt.BorderLayout.PAGE_END);
 
-        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/bauer.png"))); // NOI18N
-        jPanel10.add(jLabel9, java.awt.BorderLayout.CENTER);
+        lb1.setBackground(new java.awt.Color(255, 255, 255));
+        lb1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lb1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/BauerAvatar.png"))); // NOI18N
+        lb1.setOpaque(true);
+        jPanel10.add(lb1, java.awt.BorderLayout.CENTER);
 
         jPanel1.add(jPanel10);
 
         jPanel9.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel9.setLayout(new java.awt.BorderLayout());
 
-        jComboBox23.setFont(new java.awt.Font("Tahoma", 0, 48)); // NOI18N
-        jComboBox23.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Bauer", "Läufer", "Dame", "König", "Springer", "Turm", "Agent" }));
-        jPanel9.add(jComboBox23, java.awt.BorderLayout.PAGE_END);
+        cb2.setFont(new java.awt.Font("Tahoma", 0, 48)); // NOI18N
+        cb2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Bauer", "Läufer", "Dame", "König", "Springer", "Turm", "Agent" }));
+        cb2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                onSelect(evt);
+            }
+        });
+        jPanel9.add(cb2, java.awt.BorderLayout.PAGE_END);
 
-        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/bauer.png"))); // NOI18N
-        jPanel9.add(jLabel8, java.awt.BorderLayout.CENTER);
+        lb2.setBackground(new java.awt.Color(255, 255, 255));
+        lb2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lb2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/BauerAvatar.png"))); // NOI18N
+        lb2.setOpaque(true);
+        jPanel9.add(lb2, java.awt.BorderLayout.CENTER);
 
         jPanel1.add(jPanel9);
 
         jPanel8.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel8.setLayout(new java.awt.BorderLayout());
 
-        jComboBox22.setFont(new java.awt.Font("Tahoma", 0, 48)); // NOI18N
-        jComboBox22.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Bauer", "Läufer", "Dame", "König", "Springer", "Turm", "Agent" }));
-        jPanel8.add(jComboBox22, java.awt.BorderLayout.PAGE_END);
+        cb3.setFont(new java.awt.Font("Tahoma", 0, 48)); // NOI18N
+        cb3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Bauer", "Läufer", "Dame", "König", "Springer", "Turm", "Agent" }));
+        cb3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                onSelect(evt);
+            }
+        });
+        jPanel8.add(cb3, java.awt.BorderLayout.PAGE_END);
 
-        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/bauer.png"))); // NOI18N
-        jPanel8.add(jLabel7, java.awt.BorderLayout.CENTER);
+        lb3.setBackground(new java.awt.Color(255, 255, 255));
+        lb3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lb3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/BauerAvatar.png"))); // NOI18N
+        lb3.setOpaque(true);
+        jPanel8.add(lb3, java.awt.BorderLayout.CENTER);
 
         jPanel1.add(jPanel8);
 
         jPanel7.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel7.setLayout(new java.awt.BorderLayout());
 
-        jComboBox21.setFont(new java.awt.Font("Tahoma", 0, 48)); // NOI18N
-        jComboBox21.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Bauer", "Läufer", "Dame", "König", "Springer", "Turm", "Agent" }));
-        jPanel7.add(jComboBox21, java.awt.BorderLayout.PAGE_END);
+        cb4.setFont(new java.awt.Font("Tahoma", 0, 48)); // NOI18N
+        cb4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Bauer", "Läufer", "Dame", "König", "Springer", "Turm", "Agent" }));
+        cb4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                onSelect(evt);
+            }
+        });
+        jPanel7.add(cb4, java.awt.BorderLayout.PAGE_END);
 
-        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/bauer.png"))); // NOI18N
-        jPanel7.add(jLabel6, java.awt.BorderLayout.CENTER);
+        lb4.setBackground(new java.awt.Color(255, 255, 255));
+        lb4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lb4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/BauerAvatar.png"))); // NOI18N
+        lb4.setOpaque(true);
+        jPanel7.add(lb4, java.awt.BorderLayout.CENTER);
 
         jPanel1.add(jPanel7);
 
         jPanel6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel6.setLayout(new java.awt.BorderLayout());
 
-        jComboBox20.setFont(new java.awt.Font("Tahoma", 0, 48)); // NOI18N
-        jComboBox20.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Bauer", "Läufer", "Dame", "König", "Springer", "Turm", "Agent" }));
-        jPanel6.add(jComboBox20, java.awt.BorderLayout.PAGE_END);
+        cb5.setFont(new java.awt.Font("Tahoma", 0, 48)); // NOI18N
+        cb5.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Bauer", "Läufer", "Dame", "König", "Springer", "Turm", "Agent" }));
+        cb5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                onSelect(evt);
+            }
+        });
+        jPanel6.add(cb5, java.awt.BorderLayout.PAGE_END);
 
-        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/bauer.png"))); // NOI18N
-        jPanel6.add(jLabel5, java.awt.BorderLayout.CENTER);
+        lb5.setBackground(new java.awt.Color(255, 255, 255));
+        lb5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lb5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/BauerAvatar.png"))); // NOI18N
+        lb5.setOpaque(true);
+        jPanel6.add(lb5, java.awt.BorderLayout.CENTER);
 
         jPanel1.add(jPanel6);
 
         jPanel5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel5.setLayout(new java.awt.BorderLayout());
 
-        jComboBox19.setFont(new java.awt.Font("Tahoma", 0, 48)); // NOI18N
-        jComboBox19.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Bauer", "Läufer", "Dame", "König", "Springer", "Turm", "Agent" }));
-        jPanel5.add(jComboBox19, java.awt.BorderLayout.PAGE_END);
+        cb6.setFont(new java.awt.Font("Tahoma", 0, 48)); // NOI18N
+        cb6.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Bauer", "Läufer", "Dame", "König", "Springer", "Turm", "Agent" }));
+        cb6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                onSelect(evt);
+            }
+        });
+        jPanel5.add(cb6, java.awt.BorderLayout.PAGE_END);
 
-        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/bauer.png"))); // NOI18N
-        jPanel5.add(jLabel4, java.awt.BorderLayout.CENTER);
+        lb6.setBackground(new java.awt.Color(255, 255, 255));
+        lb6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lb6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/BauerAvatar.png"))); // NOI18N
+        lb6.setOpaque(true);
+        jPanel5.add(lb6, java.awt.BorderLayout.CENTER);
 
         jPanel1.add(jPanel5);
 
         jPanel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel4.setLayout(new java.awt.BorderLayout());
 
-        jComboBox18.setFont(new java.awt.Font("Tahoma", 0, 48)); // NOI18N
-        jComboBox18.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Bauer", "Läufer", "Dame", "König", "Springer", "Turm", "Agent" }));
-        jPanel4.add(jComboBox18, java.awt.BorderLayout.PAGE_END);
+        cb7.setFont(new java.awt.Font("Tahoma", 0, 48)); // NOI18N
+        cb7.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Bauer", "Läufer", "Dame", "König", "Springer", "Turm", "Agent" }));
+        cb7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                onSelect(evt);
+            }
+        });
+        jPanel4.add(cb7, java.awt.BorderLayout.PAGE_END);
 
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/bauer.png"))); // NOI18N
-        jPanel4.add(jLabel3, java.awt.BorderLayout.CENTER);
+        lb7.setBackground(new java.awt.Color(255, 255, 255));
+        lb7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lb7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/BauerAvatar.png"))); // NOI18N
+        lb7.setOpaque(true);
+        jPanel4.add(lb7, java.awt.BorderLayout.CENTER);
 
         jPanel1.add(jPanel4);
 
         jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel3.setLayout(new java.awt.BorderLayout());
 
-        jComboBox17.setFont(new java.awt.Font("Tahoma", 0, 48)); // NOI18N
-        jComboBox17.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Bauer", "Läufer", "Dame", "König", "Springer", "Turm", "Agent" }));
-        jPanel3.add(jComboBox17, java.awt.BorderLayout.PAGE_END);
+        cb8.setFont(new java.awt.Font("Tahoma", 0, 48)); // NOI18N
+        cb8.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Bauer", "Läufer", "Dame", "König", "Springer", "Turm", "Agent" }));
+        cb8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                onSelect(evt);
+            }
+        });
+        jPanel3.add(cb8, java.awt.BorderLayout.PAGE_END);
 
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/bauer.png"))); // NOI18N
-        jPanel3.add(jLabel2, java.awt.BorderLayout.CENTER);
+        lb8.setBackground(new java.awt.Color(255, 255, 255));
+        lb8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lb8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/BauerAvatar.png"))); // NOI18N
+        lb8.setOpaque(true);
+        jPanel3.add(lb8, java.awt.BorderLayout.CENTER);
 
         jPanel1.add(jPanel3);
 
@@ -191,6 +253,17 @@ public class DeckGUI extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void onSelect(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_onSelect
+        JComboBox box = (JComboBox) evt.getSource();
+        String unit = (String) box.getSelectedItem();
+        String name = box.getName();
+        System.out.println(name);
+    }//GEN-LAST:event_onSelect
+
+    private void onAbbrechen(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_onAbbrechen
+      this.dispose();
+    }//GEN-LAST:event_onAbbrechen
 
     /**
      * @param args the command line arguments
@@ -228,25 +301,17 @@ public class DeckGUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> cb1;
+    private javax.swing.JComboBox<String> cb2;
+    private javax.swing.JComboBox<String> cb3;
+    private javax.swing.JComboBox<String> cb4;
+    private javax.swing.JComboBox<String> cb5;
+    private javax.swing.JComboBox<String> cb6;
+    private javax.swing.JComboBox<String> cb7;
+    private javax.swing.JComboBox<String> cb8;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox<String> jComboBox17;
-    private javax.swing.JComboBox<String> jComboBox18;
-    private javax.swing.JComboBox<String> jComboBox19;
-    private javax.swing.JComboBox<String> jComboBox20;
-    private javax.swing.JComboBox<String> jComboBox21;
-    private javax.swing.JComboBox<String> jComboBox22;
-    private javax.swing.JComboBox<String> jComboBox23;
-    private javax.swing.JComboBox<String> jComboBox24;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel2;
@@ -257,5 +322,13 @@ public class DeckGUI extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
+    private javax.swing.JLabel lb1;
+    private javax.swing.JLabel lb2;
+    private javax.swing.JLabel lb3;
+    private javax.swing.JLabel lb4;
+    private javax.swing.JLabel lb5;
+    private javax.swing.JLabel lb6;
+    private javax.swing.JLabel lb7;
+    private javax.swing.JLabel lb8;
     // End of variables declaration//GEN-END:variables
 }
