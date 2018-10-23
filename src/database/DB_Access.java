@@ -6,6 +6,7 @@
 package database;
 
 import java.util.List;
+import java.util.Objects;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -20,7 +21,7 @@ public class DB_Access {
 
     private EntityManagerFactory emf;
     private EntityManager em;
-    
+
     public static DB_Access theInstance = null;
 
     public static DB_Access getInstance() {
@@ -50,12 +51,11 @@ public class DB_Access {
                 TypedQuery<Player> users = em.createNamedQuery("Player.findAll", Player.class);
                 List<Player> usersList = users.getResultList();
                 for (Player user : usersList) {
-                    if(user.getUsername().equals(username))
-                    {
+                    if (user.getUsername().equals(username)) {
                         return false;
                     }
                 }
-                Player user = new Player(username, password1, 1000L);
+                Player user = new Player(username, getHashOfString(password1), 1000L, null);
                 em.getTransaction().begin();
                 em.persist(user);
                 em.getTransaction().commit();
@@ -72,12 +72,17 @@ public class DB_Access {
     public Player getUser(String username, String password) {
         TypedQuery<Player> user = em.createNamedQuery("Player.getPlayer", Player.class);
         user.setParameter("username", username);
-        user.setParameter("password", password);
+        user.setParameter("password", getHashOfString(password));
         List<Player> userList = user.getResultList();
-        if(userList != null)
-        {
+        if (userList != null) {
             return userList.get(0);
         }
         return null;
+    }
+
+    private int getHashOfString(String str) {
+        int hash = 7;
+        hash = 97 * hash + Objects.hashCode(str);
+        return hash;
     }
 }

@@ -6,6 +6,7 @@
 package pojos;
 
 import java.io.Serializable;
+import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -30,16 +31,18 @@ public class Player implements Serializable{
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
     private String username;
-    private String password;
+    private int password;
     private Long mmr;
+    private String[] deck = new String[8];
 
     public Player() {
     }
 
-    public Player(String username, String password, Long mmr) {
+    public Player(String username, int password, Long mmr, String[] deck) {
         this.username = username;
         this.password = password;
         this.mmr = mmr;
+        this.deck = deck;
     }
 
     public Long getId() {
@@ -58,11 +61,11 @@ public class Player implements Serializable{
         this.username = username;
     }
 
-    public String getPassword() {
+    public int getPassword() {
         return password;
     }
 
-    public void setPassword(String password) {
+    public void setPassword(int password) {
         this.password = password;
     }
 
@@ -72,6 +75,14 @@ public class Player implements Serializable{
 
     public void setMmr(Long mmr) {
         this.mmr = mmr;
+    }
+
+    public String[] getDeck() {
+        return deck;
+    }
+
+    public void setDeck(String[] deck) {
+        this.deck = deck;
     }
 
     @Override
