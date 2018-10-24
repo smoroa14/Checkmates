@@ -37,7 +37,7 @@ public class Loader {
   public static Icon loadImage(String filename) {
     if(filename.equalsIgnoreCase("null.png"))
     {
-      return null;
+      //return null;
     }
     if (imageIconMap.containsKey(filename)) {
       return imageIconMap.get(filename);

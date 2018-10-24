@@ -26,14 +26,17 @@ public class Zug {
   }
 
   public List<Point> getMoeglicheZuege(Figur f) {
-    Point[] richtungen;
+    Point[] moveRichtung;
+    Point[] attackRichtung;
     if (f.isYourSide()) {
-      richtungen = f.getMoveDir();
+      moveRichtung = f.getMoveDir();
+      attackRichtung = f.getAttackDir();
     } else {
-      richtungen = f.getEnemyMoveDir();
+      moveRichtung = f.getMoveDir();
+      attackRichtung = f.getEnemyAttackDir();
     }
     List<Point> spruenge = new LinkedList<>();
-    for (Point p : richtungen) {
+    for (Point p : moveRichtung) {
       for (int i = 1; i <= (f.getZugweite() < 0 ? 8 : f.getZugweite()); i++) {
         Point sprung = new Point(f.getPos().x + p.x * i, f.getPos().y + p.y * i);
         if (sprung.x > 8 || sprung.x < 1 || sprung.y > 8 || sprung.y < 1) {
@@ -45,6 +48,20 @@ public class Zug {
         spruenge.add(sprung);
       }
     }
+    for (Point p : attackRichtung) {
+      for (int i = 1; i <= (f.getZugweite() < 0 ? 8 : f.getZugweite()); i++) {
+        Point sprung = new Point(f.getPos().x + p.x * i, f.getPos().y + p.y * i);
+        if (sprung.x > 8 || sprung.x < 1 || sprung.y > 8 || sprung.y < 1) {
+          continue;
+        }
+        if (isFigur(sprung)) {
+          if (!isYourFigur(sprung, f)) {
+            spruenge.add(sprung);
+          }
+          break;
+        }
+      }
+    }
     return spruenge;
   }
 
@@ -52,6 +69,14 @@ public class Zug {
     for (Figur f : main.getAllFigures()) {
       if (f.getPos().equals(pos))
         return true;
+    }
+    return false;
+  }
+
+  public boolean isYourFigur(Point pos, Figur your) {
+    for (Figur f : main.getAllFigures()) {
+      if (f.getPos().equals(pos))
+        return !f.isYourSide();
     }
     return false;
   }
