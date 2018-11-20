@@ -9,8 +9,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author rober
@@ -21,10 +23,12 @@ public class Main extends JFrame {
   private List<Figur> friendFigures;
   private List<Figur> enemyFigures;
   private List<Point> moeglicheZuege;
+  private Map<Point, String> iconsBefore;
   private Container cont;
   private Point selectedFigure;
   private Figur selected;
   private Zug zug;
+  private boolean p1turn = true;
 
   public Main() {
     this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -45,8 +49,7 @@ public class Main extends JFrame {
           //felder[x][y].setIcon(Loader.loadImage("null.png"));
         } else {
           felder[x][y] = new ImageLabel();
-          if((x+y-2) % 2 == 0)
-          {
+          if ((x + y - 2) % 2 == 0) {
             ((ImageLabel) felder[x][y]).setColor(new Color(101, 62, 29).brighter());
           }
           ((ImageLabel) felder[x][y]).setIcon(Loader.loadImage("null.png"), "null.png");
@@ -131,68 +134,88 @@ public class Main extends JFrame {
       all.addAll(enemyFigures);
       for (Figur f : all) {
         if (f.getPos().equals(new Point(x, y))) {
+
+          ///////// Unselect
           if (selectedFigure != null) {
-            if (selectedFigure.equals(f.getPos())) break;
+            //if (selectedFigure.equals(f.getPos())) break;
 
-            if(felder[selectedFigure.x][selectedFigure.y] instanceof ImageLabel)((ImageLabel)felder[selectedFigure.x][selectedFigure.y]).setUnselected();
-            for (Point p : moeglicheZuege) {
+            if (felder[selectedFigure.x][selectedFigure.y] instanceof ImageLabel)
+              ((ImageLabel) felder[selectedFigure.x][selectedFigure.y]).setUnselected();
+            for (Point moegZug : moeglicheZuege) {
 
-              if (felder[p.x][p.y] instanceof ImageLabel) {
-                ((ImageLabel) felder[p.x][p.y]).setIcon(Loader.loadImage("null.png"), "null.png");
+              if (felder[moegZug.x][moegZug.y] instanceof ImageLabel) {
+                ((ImageLabel) felder[moegZug.x][moegZug.y]).setIcon(Loader.loadImage("null.png"), "null.png");
+                for (Point p : iconsBefore.keySet()) {
+                  /*if(p.equals(new Point(moegZug.x, moegZug.y)))
+                  {
+                    ((ImageLabel) felder[moegZug.x][moegZug.y]).setIcon(Loader.loadImage(iconsBefore.get(p)), "null.png");
+                  }*/
+                }
               } else {
-                felder[p.x][p.y].setIcon(Loader.loadImage("null.png"));
+                felder[moegZug.x][moegZug.y].setIcon(Loader.loadImage("null.png"));
               }
             }
           }
-          if(lb instanceof ImageLabel)((ImageLabel)lb).setSelected();
-          selectedFigure = f.getPos();
-          selected = f;
 
-          moeglicheZuege = zug.getMoeglicheZuege(f);
+          ///////// Select Figure
+          if (f.isYourSide() == p1turn) {
+            if (lb instanceof ImageLabel) ((ImageLabel) lb).setSelected();
+            selectedFigure = f.getPos();
+            selected = f;
 
-          for (Point p : moeglicheZuege) {
-            if (felder[p.x][p.y] instanceof ImageLabel) {
-              ((ImageLabel) felder[p.x][p.y]).setIcon(Loader.loadImage("blau.png"), "blau.png");
-            } else {
-              felder[p.x][p.y].setIcon(Loader.loadImage("blau.png"));
+            moeglicheZuege = zug.getMoeglicheZuege(f);
+            iconsBefore = new HashMap<>();
+            for (Point p : moeglicheZuege) {
+
+              if (felder[p.x][p.y] instanceof ImageLabel) {
+                if (!((ImageLabel) felder[p.x][p.y]).getIconName().equalsIgnoreCase("null.png")) {
+                  iconsBefore.put(p, ((ImageLabel) felder[p.x][p.y]).getIconName());
+                }
+                ((ImageLabel) felder[p.x][p.y]).setIcon(Loader.loadImage("blau.png"), "blau.png");
+              } else {
+                felder[p.x][p.y].setIcon(Loader.loadImage("blau.png"));
+              }
             }
           }
-
           return;
         }
       }
 
+      ///////// Figur bewegen
       // Alle Blau gefärbten Felder durchgehen
-      for (Point p : moeglicheZuege) {
-        // Ob man auf das Blaue Feld geklickt hat
-        if (p.equals(new Point(x, y))) {
+      if (selectedFigure != null) {
+        for (Point p : moeglicheZuege) {
+          // Ob man auf das Blaue Feld geklickt hat
+          if (p.equals(new Point(x, y))) {
 
-          // Alle blauen Felder entfernen
-          for (Point p2 : moeglicheZuege) {
-            if (felder[p2.x][p2.y] instanceof ImageLabel) {
-              ((ImageLabel) felder[p2.x][p2.y]).setIcon(Loader.loadImage("null.png"), "null.png");
-            } else {
-              felder[p2.x][p2.y].setIcon(Loader.loadImage("null.png"));
+            // Alle blauen Felder entfernen
+            for (Point p2 : moeglicheZuege) {
+              if (felder[p2.x][p2.y] instanceof ImageLabel) {
+                ((ImageLabel) felder[p2.x][p2.y]).setIcon(Loader.loadImage("null.png"), "null.png");
+              } else {
+                felder[p2.x][p2.y].setIcon(Loader.loadImage("null.png"));
+              }
+
             }
 
-          }
+            // Bild Setzen
+            if (felder[p.x][p.y] instanceof ImageLabel) {
+              ((ImageLabel) felder[p.x][p.y]).setIcon(selected.getBild(), selected.getImage_name());
+            } else {
+              felder[p.x][p.y].setIcon(selected.getBild());
+            }
 
-          // Bild Setzen
-          if (felder[p.x][p.y] instanceof ImageLabel) {
-            ((ImageLabel) felder[p.x][p.y]).setIcon(selected.getBild(), selected.getImage_name());
-          } else {
-            felder[p.x][p.y].setIcon(selected.getBild());
-          }
+            // Bild entfernen
+            if (felder[selected.getPos().x][selected.getPos().y] instanceof ImageLabel) {
+              ((ImageLabel) felder[selected.getPos().x][selected.getPos().y]).setIcon(Loader.loadImage("null.png"), "null.png");
+            } else {
+              felder[selected.getPos().x][selected.getPos().y].setIcon(Loader.loadImage("null.png"));
+            }
 
-          // Bild entfernen
-          if (felder[selected.getPos().x][selected.getPos().y] instanceof ImageLabel) {
-            ((ImageLabel) felder[selected.getPos().x][selected.getPos().y]).setIcon(Loader.loadImage("null.png"), "null.png");
-          } else {
-            felder[selected.getPos().x][selected.getPos().y].setIcon(Loader.loadImage("null.png"));
+            selected.setPos(p);
+            moeglicheZuege.clear();
+            p1turn = !p1turn;
           }
-
-          selected.setPos(p);
-          moeglicheZuege.clear();
         }
       }
 

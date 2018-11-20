@@ -7,10 +7,7 @@ package GUI;
 
 import bl.Loader;
 import database.DB_Access;
-import java.io.File;
-import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
-import javax.swing.JFrame;
 
 /**
  *
