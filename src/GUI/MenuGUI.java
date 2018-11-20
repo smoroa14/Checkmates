@@ -266,7 +266,7 @@ public class MenuGUI extends javax.swing.JFrame {
                 eingabe = JOptionPane.showInputDialog("Raum-Passwort benötigt:");
             } else {
                 if (eingabe.equals(selectedroom.getPasswort())) {
-                    Main maingui = new Main();
+                    Main2 maingui = new Main2();
                     maingui.setVisible(true);
                     this.dispose();
                 }

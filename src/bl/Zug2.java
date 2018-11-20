@@ -1,6 +1,5 @@
 package bl;
 
-import GUI.Main;
 import GUI.Main2;
 import beans.figur.Figur;
 
