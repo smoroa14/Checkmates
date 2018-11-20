@@ -8,6 +8,7 @@ package GUI;
 import bl.Loader;
 import database.DB_Access;
 import javax.swing.JComboBox;
+import pojos.Player;
 
 /**
  *
@@ -19,11 +20,39 @@ public class DeckGUI extends javax.swing.JFrame {
      * Creates new form DeckGUI
      *
      */
+    private Player p;
+
+    public void setP(Player p) {
+        this.p = p;
+        loadDeck();
+    }
+
     public DeckGUI() {
 //        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 //        this.setUndecorated(true);
         initComponents();
+    }
 
+    private void loadDeck() {
+        String[] deck = DB_Access.getInstance().loadDeck(p.getUsername());
+        if (deck != null) {
+            lb1.setIcon(Loader.loadImage(deck[0] + "Avatar.png"));
+            cb1.setSelectedItem(deck[0]);
+            lb2.setIcon(Loader.loadImage(deck[1] + "Avatar.png"));
+            cb2.setSelectedItem(deck[1]);
+            lb3.setIcon(Loader.loadImage(deck[2] + "Avatar.png"));
+            cb3.setSelectedItem(deck[2]);
+            lb4.setIcon(Loader.loadImage(deck[3] + "Avatar.png"));
+            cb4.setSelectedItem(deck[3]);
+            lb5.setIcon(Loader.loadImage(deck[4] + "Avatar.png"));
+            cb5.setSelectedItem(deck[4]);
+            lb6.setIcon(Loader.loadImage(deck[5] + "Avatar.png"));
+            cb6.setSelectedItem(deck[5]);
+            lb7.setIcon(Loader.loadImage(deck[6] + "Avatar.png"));
+            cb7.setSelectedItem(deck[6]);
+            lb8.setIcon(Loader.loadImage(deck[7] + "Avatar.png"));
+            cb8.setSelectedItem(deck[7]);
+        }
     }
 
     /**
@@ -332,7 +361,7 @@ public class DeckGUI extends javax.swing.JFrame {
         String cb7str = (String) cb7.getSelectedItem();
         String cb8str = (String) cb8.getSelectedItem();
         String[] deck = {cb1str, cb2str, cb3str, cb4str, cb5str, cb6str, cb7str, cb8str};
-        DB_Access.getInstance().saveDeck(deck, "test");
+        DB_Access.getInstance().saveDeck(deck, p.getUsername());
         LoginGUI logingui = new LoginGUI();
         logingui.setVisible(true);
         this.dispose();
