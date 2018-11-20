@@ -76,7 +76,7 @@ public class Zug2 {
   public boolean isYourFigur(Point pos, Figur your) {
     for (Figur f : main.getAllFigures()) {
       if (f.getPos().equals(pos))
-        return !f.isYourSide();
+        return f.isYourSide() && your.isYourSide();
     }
     return false;
   }

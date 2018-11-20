@@ -14,7 +14,7 @@ public class ImageLabel extends JLabel {
   private String oldName;
   private Icon unselected;
   private Icon selected;
-  private Color color = new Color(181, 142, 109).brighter();
+  //private Color color = new Color(181, 142, 109).brighter();
 
   public ImageLabel(String text) {
     super(text);
@@ -25,14 +25,14 @@ public class ImageLabel extends JLabel {
   }
 
   public void setIcon(Icon icon, String name) {
-    this.setIcon(icon);
+    /*this.setIcon(icon);
     System.out.println("old: " + this.name + " - new: " + name);
-    this.name = name;
+    this.name = name;*/
     repaint();
   }
 
   public void setIcon(Icon icon) {
-    oldImage = _myimage;
+    /*oldImage = _myimage;
     oldName = name;
     super.setIcon(icon);
     if (icon == null) {
@@ -52,13 +52,13 @@ public class ImageLabel extends JLabel {
 
     img = setSelected((BufferedImage) new ImageIcon(((ImageIcon) this.getIcon()).getImage()).getImage(), false);
     unselected = new ImageIcon(img);
-
+*/
     repaint();
   }
 
   public void setOldImage()
   {
-    System.out.println(oldName + " - " + this.getName());
+    /*System.out.println(oldName + " - " + this.getName());
     if(oldImage == null)
     {
       setIcon(Loader.loadImage("null.png"), "null.png");
@@ -67,7 +67,7 @@ public class ImageLabel extends JLabel {
     }else{
       _myimage = oldImage;
       name = oldName;
-    }
+    }*/
     repaint();
   }
 
@@ -96,9 +96,9 @@ public class ImageLabel extends JLabel {
   @Override
   public void paint(Graphics g)
   {
-    g.setColor(color);
-    g.fillRect(0, 0, this.getWidth(), this.getHeight());
-    g.drawImage(_myimage, 0, 0, this.getWidth(), this.getHeight(), null);
+    //g.setColor(color);
+    //g.fillRect(0, 0, this.getWidth(), this.getHeight());
+    //g.drawImage(_myimage, 0, 0, this.getWidth(), this.getHeight(), null);
   }
 
   private BufferedImage setSelected(BufferedImage img, boolean selected) {
@@ -131,14 +131,6 @@ public class ImageLabel extends JLabel {
   public Color getColor(BufferedImage img, int col, int row) {
     Color color = new Color(img.getRGB(col, row));
     return color;
-  }
-
-  public Color getColor() {
-    return color;
-  }
-
-  public void setColor(Color c) {
-    this.color = c;
   }
 
 }
