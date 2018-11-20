@@ -6,10 +6,8 @@
 package GUI;
 
 import bl.Loader;
-import java.io.File;
-import javax.swing.ImageIcon;
+import database.DB_Access;
 import javax.swing.JComboBox;
-import javax.swing.JFrame;
 
 /**
  *
@@ -73,6 +71,11 @@ public class DeckGUI extends javax.swing.JFrame {
 
         jButton1.setFont(new java.awt.Font("Tahoma", 0, 48)); // NOI18N
         jButton1.setText("Speichern");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                onSpeichern(evt);
+            }
+        });
         jPanel2.add(jButton1);
 
         jButton2.setFont(new java.awt.Font("Tahoma", 0, 48)); // NOI18N
@@ -318,6 +321,22 @@ public class DeckGUI extends javax.swing.JFrame {
     private void onAbbrechen(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_onAbbrechen
         this.dispose();
     }//GEN-LAST:event_onAbbrechen
+
+    private void onSpeichern(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_onSpeichern
+        String cb1str = (String) cb1.getSelectedItem();
+        String cb2str = (String) cb2.getSelectedItem();
+        String cb3str = (String) cb3.getSelectedItem();
+        String cb4str = (String) cb4.getSelectedItem();
+        String cb5str = (String) cb5.getSelectedItem();
+        String cb6str = (String) cb6.getSelectedItem();
+        String cb7str = (String) cb7.getSelectedItem();
+        String cb8str = (String) cb8.getSelectedItem();
+        String[] deck = {cb1str, cb2str, cb3str, cb4str, cb5str, cb6str, cb7str, cb8str};
+        DB_Access.getInstance().saveDeck(deck, "test");
+        LoginGUI logingui = new LoginGUI();
+        logingui.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_onSpeichern
 
     /**
      * @param args the command line arguments

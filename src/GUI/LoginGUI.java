@@ -73,6 +73,11 @@ public class LoginGUI extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                onClose(evt);
+            }
+        });
         getContentPane().setLayout(new java.awt.GridLayout(1, 2));
 
         lbMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Schachclub.jpg"))); // NOI18N
@@ -352,6 +357,10 @@ public class LoginGUI extends javax.swing.JFrame {
             System.out.println(ex.toString());
         }
     }//GEN-LAST:event_onRegisterEnter
+
+    private void onClose(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_onClose
+        access.disconnect();
+    }//GEN-LAST:event_onClose
 
     /**
      * @param args the command line arguments
