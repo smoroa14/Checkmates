@@ -37,8 +37,11 @@ public class DB_Access {
     }
 
     public void connect() {
-        emf = Persistence.createEntityManagerFactory("CheckMatesPU");
-        em = emf.createEntityManager();
+        if(emf == null && em == null)
+        {
+            emf = Persistence.createEntityManagerFactory("CheckMatesPU");
+            em = emf.createEntityManager();
+        }
     }
 
     public void disconnect() {
@@ -81,13 +84,13 @@ public class DB_Access {
         return null;
     }
 
-    public void saveDeck(String[] deck, String username){
+    public void saveDeck(String[] deck, String username) {
         Query updateDeck = em.createNamedQuery("Player.updateDeck");
         updateDeck.setParameter("deck", deck);
         updateDeck.setParameter("username", username);
         updateDeck.executeUpdate();
     }
-    
+
     private int getHashOfString(String str) {
         int hash = 7;
         hash = 97 * hash + Objects.hashCode(str);

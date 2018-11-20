@@ -5,7 +5,10 @@
  */
 package GUI;
 
+import bl.Loader;
 import database.DB_Access;
+import java.io.File;
+import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 
@@ -17,6 +20,7 @@ public class DeckGUI extends javax.swing.JFrame {
 
     /**
      * Creates new form DeckGUI
+     *
      */
     public DeckGUI() {
 //        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -100,6 +104,7 @@ public class DeckGUI extends javax.swing.JFrame {
 
         cb1.setFont(new java.awt.Font("Tahoma", 0, 48)); // NOI18N
         cb1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Bauer", "Läufer", "Dame", "König", "Springer", "Turm", "Agent" }));
+        cb1.setName("cb1"); // NOI18N
         cb1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 onSelect(evt);
@@ -120,6 +125,7 @@ public class DeckGUI extends javax.swing.JFrame {
 
         cb2.setFont(new java.awt.Font("Tahoma", 0, 48)); // NOI18N
         cb2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Bauer", "Läufer", "Dame", "König", "Springer", "Turm", "Agent" }));
+        cb2.setName("cb2"); // NOI18N
         cb2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 onSelect(evt);
@@ -140,6 +146,7 @@ public class DeckGUI extends javax.swing.JFrame {
 
         cb3.setFont(new java.awt.Font("Tahoma", 0, 48)); // NOI18N
         cb3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Bauer", "Läufer", "Dame", "König", "Springer", "Turm", "Agent" }));
+        cb3.setName("cb3"); // NOI18N
         cb3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 onSelect(evt);
@@ -160,6 +167,7 @@ public class DeckGUI extends javax.swing.JFrame {
 
         cb4.setFont(new java.awt.Font("Tahoma", 0, 48)); // NOI18N
         cb4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Bauer", "Läufer", "Dame", "König", "Springer", "Turm", "Agent" }));
+        cb4.setName("cb4"); // NOI18N
         cb4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 onSelect(evt);
@@ -180,6 +188,7 @@ public class DeckGUI extends javax.swing.JFrame {
 
         cb5.setFont(new java.awt.Font("Tahoma", 0, 48)); // NOI18N
         cb5.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Bauer", "Läufer", "Dame", "König", "Springer", "Turm", "Agent" }));
+        cb5.setName("cb5"); // NOI18N
         cb5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 onSelect(evt);
@@ -200,6 +209,7 @@ public class DeckGUI extends javax.swing.JFrame {
 
         cb6.setFont(new java.awt.Font("Tahoma", 0, 48)); // NOI18N
         cb6.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Bauer", "Läufer", "Dame", "König", "Springer", "Turm", "Agent" }));
+        cb6.setName("cb6"); // NOI18N
         cb6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 onSelect(evt);
@@ -220,6 +230,7 @@ public class DeckGUI extends javax.swing.JFrame {
 
         cb7.setFont(new java.awt.Font("Tahoma", 0, 48)); // NOI18N
         cb7.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Bauer", "Läufer", "Dame", "König", "Springer", "Turm", "Agent" }));
+        cb7.setName("cb7"); // NOI18N
         cb7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 onSelect(evt);
@@ -240,6 +251,7 @@ public class DeckGUI extends javax.swing.JFrame {
 
         cb8.setFont(new java.awt.Font("Tahoma", 0, 48)); // NOI18N
         cb8.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Bauer", "Läufer", "Dame", "König", "Springer", "Turm", "Agent" }));
+        cb8.setName("cb8"); // NOI18N
         cb8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 onSelect(evt);
@@ -264,11 +276,53 @@ public class DeckGUI extends javax.swing.JFrame {
         JComboBox box = (JComboBox) evt.getSource();
         String unit = (String) box.getSelectedItem();
         String name = box.getName();
+        String[] parts = name.split("");
+        switch (parts[2]) {
+            case "1":
+                lb1.setIcon(Loader.loadImage(unit.toLowerCase() + "Avatar.png"));
+                break;
+
+            case "2":
+                lb2.setIcon(Loader.loadImage(unit.toLowerCase() + "Avatar.png"));
+
+                break;
+
+            case "3":
+                lb3.setIcon(Loader.loadImage(unit.toLowerCase() + "Avatar.png"));
+
+                break;
+
+            case "4":
+                lb4.setIcon(Loader.loadImage(unit.toLowerCase() + "Avatar.png"));
+
+                break;
+
+            case "5":
+                lb5.setIcon(Loader.loadImage(unit.toLowerCase() + "Avatar.png"));
+
+                break;
+
+            case "6":
+                lb6.setIcon(Loader.loadImage(unit.toLowerCase() + "Avatar.png"));
+
+                break;
+
+            case "7":
+                lb7.setIcon(Loader.loadImage(unit.toLowerCase() + "Avatar.png"));
+
+                break;
+
+            case "8":
+                lb8.setIcon(Loader.loadImage(unit.toLowerCase() + "Avatar.png"));
+
+                break;
+
+        }
         System.out.println(name);
     }//GEN-LAST:event_onSelect
 
     private void onAbbrechen(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_onAbbrechen
-      this.dispose();
+        this.dispose();
     }//GEN-LAST:event_onAbbrechen
 
     private void onSpeichern(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_onSpeichern

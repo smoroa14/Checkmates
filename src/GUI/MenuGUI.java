@@ -22,7 +22,6 @@ import pojos.Player;
 public class MenuGUI extends javax.swing.JFrame {
 
     private SoundPlayer player = SoundPlayer.getInstance();
-    private String selgame = "Schach"; //Ausgewähltes Spiel
     private Player u;
     DefaultListModel<Raum> dlm = new DefaultListModel<>();
     LinkedList<Raum> raumlist = new LinkedList<>();
