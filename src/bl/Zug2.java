@@ -1,16 +1,17 @@
 package bl;
 
 import GUI.Main;
+import GUI.Main2;
 import beans.figur.Figur;
 
 import java.awt.*;
 import java.util.LinkedList;
 import java.util.List;
 
-public class Zug {
-  private Main main;
+public class Zug2 {
+  private Main2 main;
 
-  public Zug(Main main) {
+  public Zug2(Main2 main) {
     this.main = main;
   }
 
