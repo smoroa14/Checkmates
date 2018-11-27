@@ -69,8 +69,10 @@ public class Zug2 {
       if (f.getPos().equals(pos))
         return true;
     }
+    
     return false;
   }
+  
 
   public boolean isYourFigur(Point pos, Figur your) {
     for (Figur f : main.getAllFigures()) {
