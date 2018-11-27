@@ -38,6 +38,11 @@ public class MenuGUI extends javax.swing.JFrame {
         lbName.setText("Name: " + u.getUsername());
         lbGeld.setText("Elo: " + u.getMmr());
     }
+    
+    public void dohier(String name)
+    {
+        lbName.setText(name);
+    }
 
     public MenuGUI() {
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
