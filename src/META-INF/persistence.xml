@@ -3,10 +3,10 @@
   <persistence-unit name="CheckMatesPU" transaction-type="RESOURCE_LOCAL">
     <provider>org.hibernate.ejb.HibernatePersistence</provider>
     <properties>
-      <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://baasu.db.elephantsql.com:5432/tajtnluf"/>
-      <property name="javax.persistence.jdbc.user" value="tajtnluf"/>
+      <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/checkmatesdb"/>
+      <property name="javax.persistence.jdbc.user" value="postgres"/>
       <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
-      <property name="javax.persistence.jdbc.password" value="jsanIDkx4y4SvhHS2x3_jY2fAC3_bGRW"/>
+      <property name="javax.persistence.jdbc.password" value="postgres"/>
       <property name="hibernate.cache.provider_class" value="org.hibernate.cache.NoCacheProvider"/>
       <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
     </properties>
