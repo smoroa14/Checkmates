@@ -6,7 +6,6 @@
 package GUI;
 
 import beans.Raum;
-import java.io.IOException;
 import java.util.LinkedList;
 import threads.SoundPlayer;
 import java.util.logging.Level;
@@ -15,7 +14,6 @@ import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import pojos.Player;
-import threads.UserClient;
 
 /**
  *
@@ -25,13 +23,10 @@ public class MenuGUI extends javax.swing.JFrame {
 
     private SoundPlayer player = SoundPlayer.getInstance();
     private Player u;
-    private String username = "";
     DefaultListModel<Raum> dlm = new DefaultListModel<>();
     LinkedList<Raum> raumlist = new LinkedList<>();
     boolean used = false;
     Raum selectedroom;
-
-    private UserClient userClient;
 
     //private DB_Access access = DB_Access.getInstance();
     public Player getS() {
@@ -49,14 +44,6 @@ public class MenuGUI extends javax.swing.JFrame {
         this.setUndecorated(true);
         initComponents();
         liRaum.setModel(dlm);
-
-        try {
-            userClient = new UserClient(this);
-            userClient.sendRequests(username, '+');
-
-        } catch (IOException ex) {
-            Logger.getLogger(MenuGUI.class.getName()).log(Level.SEVERE, null, ex);
-        }
 
     }
 
@@ -309,15 +296,6 @@ public class MenuGUI extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public void dohier(String str) {
-        System.out.println(str);
-        username = str;
-    }
-    
-    public void addToRoomList(Raum r){
-        dlm.addElement(r);
-    }
-
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

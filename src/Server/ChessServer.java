@@ -5,7 +5,6 @@
  */
 package Server;
 
-import beans.Raum;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -29,7 +28,6 @@ public class ChessServer {
     private final int PORT = 1337;
     private ServerThread st;
     private List<String> usernames = new LinkedList<>();
-    private List<Raum> rooms = new LinkedList<Raum>();
     private Map<String, PrintWriter> broadcast = new HashMap();
 
     public void startServer() {
@@ -54,25 +52,7 @@ public class ChessServer {
 
         }
     }
-
-    public void manageUser(char operator, String user) {
-        if (operator == '+') {
-            usernames.add(user);
-            broadcast.put(user, pw);
-        } else {
-            usernames.remove(user);
-            broadcast.remove(user);
-        }
-    }
-
-    public void manageRooms(char operator, Raum room) {
-        if (operator == '+') {
-            rooms.add(room);
-        } else {
-            rooms.remove(room);
-        }
-    }
-
+    
     public String getUsers() {
         String guys = ";";
         int help = 0;
@@ -87,6 +67,18 @@ public class ChessServer {
         return guys;
     }
 
+     public void manageUser(char operator, String user) {
+        if (operator == '+') {
+            if (usernames.contains(user)) {
+            }
+            System.out.println("user: "+user);
+            usernames.add(user);
+            broadcast.put(user, pw);
+        } else {
+            usernames.remove(user);
+            broadcast.remove(user);
+        }
+    }
     private void log(String message) {
         System.out.println(message);
     }
@@ -157,10 +149,10 @@ public class ChessServer {
                             manageUser('+', splitted[1]);
                             //serverFrame.writeLog("User " + splitted[1] + " has been added");
 
-                            System.out.println("Usersize... :" + broadcast.size());
+                            System.out.println("Usersize... :"+broadcast.size());
                             for (String username : usernames) {
                                 PrintWriter pwr = broadcast.get(username);
-
+                               
                                 pwr.println("+!!" + getUsers());
                                 pwr.flush();
                             }
@@ -175,26 +167,16 @@ public class ChessServer {
                                 pwr.println("-!!" + splitted[1]);
                                 pwr.flush();
                             }
-                            // System.out.println("Löschen  ----------" + getUsers());
+                           // System.out.println("Löschen  ----------" + getUsers());
                         }
                     }
-                    
-                    if(line.contains("###Raum")){
-                        for (String username : usernames) {
-                                PrintWriter pwr = broadcast.get(username);
-
-                                pwr.println("TESTTEST AUSGABE AUSGABE TEST TEST");
-                                pwr.flush();
-                            }
-                    }
-
                     System.out.println(line);
                     if (line.contains("Zug123321")) {
                         for (String username : usernames) {
                             PrintWriter pwr = broadcast.get(username);
                             String[] splitted = line.split("Zug123321");
                             System.out.println("drrrrrrrrrrrrreeeeeeeeeeeeeeeeeeeeeeeeecccccccccccccccccckkkkkkkkkkkkkkkk");
-                            if (line.contains("!!!!!")) {
+                            if(line.contains("!!!!!")){
                                 System.out.println("hilllllllllllllllllllllllllllfffffffffffffffffffeeeeeeeeeeeeeeeeeeeeeeeeeee");
                             }
                             pwr.println("!!!!!Zug von : " + splitted[1]);

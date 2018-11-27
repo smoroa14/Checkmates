@@ -5,8 +5,7 @@
  */
 package threads;
 
-import GUI.MenuGUI;
-import beans.Raum;
+import Server.Client_Frame;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -14,8 +13,6 @@ import java.io.PrintWriter;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -27,14 +24,12 @@ public class UserClient {
     private InetAddress addr;
     private Socket socket;
     private String username = "";
-    private MenuGUI clientFrame;
+    private Client_Frame clientFrame;
 
     private Scanner scan;
     private PrintWriter pw;
 
     private Thread t;
-
-    private List<Raum> roomList = new LinkedList<>();
 
     public UserClient() throws UnknownHostException, IOException {
         addr = InetAddress.getLocalHost();
@@ -59,9 +54,9 @@ public class UserClient {
             pw.println("-!#!" + eingabe);
             pw.flush();
         }
-        if (operator == 'u') {
-            System.out.println("mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm " + eingabe);
-            pw.println("Zug123321" + eingabe);
+        if(operator == 'u'){
+        System.out.println("mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm "+eingabe);
+            pw.println("Zug123321"+eingabe);
             pw.flush();
         }
         if (operator == '§') {
@@ -92,34 +87,15 @@ public class UserClient {
             leuteString = scan.nextLine();
             System.out.println("typies: " + leuteString);
         }
+//        pw.close();
+//        scan.close();
         return leuteString;
     }
 
-    public void addRoom(Raum room) throws IOException {
-        if (!roomList.contains(room)) {
-            roomList.add(room);
-
-            OutputStream os = socket.getOutputStream();
-            PrintWriter pw = new PrintWriter(os);
-
-            InputStream is = socket.getInputStream();
-            Scanner scan = new Scanner(is);
-            
-            pw.println("###Raum");
-            pw.flush();
-            
-            if (scan.hasNextLine()) {
-            //List<Raum> roomList = scan.nextLine();
-                System.out.println(scan.nextLine());
-        }
-        }
-    }
-
-    public UserClient(MenuGUI clientFrame) throws IOException {
+    public UserClient(Client_Frame clientFrame) throws IOException {
         this.clientFrame = clientFrame;
         addr = InetAddress.getLocalHost();
         socket = new Socket(addr, 1337);
-        System.out.println("adjskfklasdljksdakdfslk   " + socket);
 
         InputStream is = socket.getInputStream();
         scan = new Scanner(is);
@@ -130,6 +106,10 @@ public class UserClient {
         ClientThread ct = new ClientThread(scan, clientFrame);
         Thread t = new Thread(ct);
         t.start();
+
+//        ClientThread ct = new ClientThread(scan);
+//        t = new Thread(ct);
+//        t.start();
     }
 
 }
