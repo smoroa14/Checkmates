@@ -1,16 +1,16 @@
 package bl;
 
-import GUI.Main;
+import GUI.Main2;
 import beans.figur.Figur;
 
 import java.awt.*;
 import java.util.LinkedList;
 import java.util.List;
 
-public class Zug {
-  private Main main;
+public class Zug2 {
+  private Main2 main;
 
-  public Zug(Main main) {
+  public Zug2(Main2 main) {
     this.main = main;
   }
 
@@ -28,11 +28,10 @@ public class Zug {
   public List<Point> getMoeglicheZuege(Figur f) {
     Point[] moveRichtung;
     Point[] attackRichtung;
+    moveRichtung = f.getMoveDir();
     if (f.isYourSide()) {
-      moveRichtung = f.getMoveDir();
       attackRichtung = f.getAttackDir();
     } else {
-      moveRichtung = f.getMoveDir();
       attackRichtung = f.getEnemyAttackDir();
     }
     List<Point> spruenge = new LinkedList<>();
@@ -76,7 +75,7 @@ public class Zug {
   public boolean isYourFigur(Point pos, Figur your) {
     for (Figur f : main.getAllFigures()) {
       if (f.getPos().equals(pos))
-        return !f.isYourSide();
+        return f.isYourSide() && your.isYourSide();
     }
     return false;
   }
