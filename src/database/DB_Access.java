@@ -95,7 +95,7 @@ public class DB_Access {
         Query getDeckofUser = em.createNamedQuery("Player.findDeck");
         getDeckofUser.setParameter("username", username);
         List<String> deck = getDeckofUser.getResultList();
-        return (String[]) deck.toArray();
+        return  (String[]) deck.toArray();
     }
     
     private int getHashOfString(String str) {
