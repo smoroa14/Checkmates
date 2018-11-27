@@ -161,7 +161,7 @@ public class Client_Frame extends javax.swing.JFrame {
 
         try {
 
-            user = new UserClient(this);
+            user = new UserClient();
             user.sendRequests(name + " ", '+');
             // System.out.println(name);
 

@@ -51,7 +51,7 @@ public class MenuGUI extends javax.swing.JFrame {
         liRaum.setModel(dlm);
 
         try {
-            userClient = new UserClient();
+            userClient = new UserClient(this);
             userClient.sendRequests(username, '+');
 
         } catch (IOException ex) {
