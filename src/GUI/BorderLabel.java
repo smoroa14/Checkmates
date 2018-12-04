@@ -10,5 +10,6 @@ public class BorderLabel extends JLabel {
     g.setColor(Color.DARK_GRAY.darker());
     g.fillRect(0, 0, this.getWidth(), this.getHeight());
     super.paint(g);
+    
   }
 }
