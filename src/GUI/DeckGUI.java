@@ -21,6 +21,7 @@ public class DeckGUI extends javax.swing.JFrame {
      *
      */
     private Player p;
+    String[] deck = new String[8];
 
     public void setP(Player p) {
         this.p = p;
@@ -31,10 +32,45 @@ public class DeckGUI extends javax.swing.JFrame {
 //        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 //        this.setUndecorated(true);
         initComponents();
+//        if (deck != null) {
+//            for (int i = 0; i < deck.length; i++) {
+//                switch (deck[i]) {
+//                    case "König":
+//                        
+//                        break;
+//                    
+//                    case "Dame":
+//                        pbUnits.setValue(pbUnits.getValue() + 9);
+//                        break;
+//                    
+//                    case "Bauer":
+//                        pbUnits.setValue(pbUnits.getValue() + 1);
+//                        break;
+//                    
+//                    case "Läufer":
+//                        pbUnits.setValue(pbUnits.getValue() + 3);
+//                        break;
+//                    
+//                    case "Springer":
+//                        pbUnits.setValue(pbUnits.getValue() + 3);
+//                        break;
+//                    
+//                    case "Turm":
+//                        pbUnits.setValue(pbUnits.getValue() + 5);
+//                        break;
+//                    
+//                    case "Agent":
+//                        pbUnits.setValue(pbUnits.getValue() + 2);
+//                        break;
+//                }
+//                
+//            }
+//        }
+
     }
 
     private void loadDeck() {
-        String[] deck = DB_Access.getInstance().loadDeck(p.getUsername());
+        deck = DB_Access.getInstance().loadDeck(p.getUsername());
         if (deck != null) {
             lb1.setIcon(Loader.loadImage(deck[0] + "Avatar.png"));
             cb1.setSelectedItem(deck[0]);
@@ -64,10 +100,12 @@ public class DeckGUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel11 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        pbUnits = new javax.swing.JProgressBar();
         jPanel2 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jPanel10 = new javax.swing.JPanel();
         cb1 = new javax.swing.JComboBox<>();
@@ -96,6 +134,18 @@ public class DeckGUI extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jPanel11.setLayout(new java.awt.GridLayout(2, 0));
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 48)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Deck bearbeiten");
+        jPanel11.add(jLabel1);
+
+        pbUnits.setMaximum(31);
+        jPanel11.add(pbUnits);
+
+        getContentPane().add(jPanel11, java.awt.BorderLayout.NORTH);
+
         jPanel2.setLayout(new java.awt.GridLayout(1, 2));
 
         jButton1.setFont(new java.awt.Font("Tahoma", 0, 48)); // NOI18N
@@ -117,11 +167,6 @@ public class DeckGUI extends javax.swing.JFrame {
         jPanel2.add(jButton2);
 
         getContentPane().add(jPanel2, java.awt.BorderLayout.SOUTH);
-
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 48)); // NOI18N
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Deck bearbeiten");
-        getContentPane().add(jLabel1, java.awt.BorderLayout.PAGE_START);
 
         jPanel1.setLayout(new java.awt.GridLayout(1, 0, 8, 0));
 
@@ -303,45 +348,80 @@ public class DeckGUI extends javax.swing.JFrame {
         String unit = (String) box.getSelectedItem();
         String name = box.getName();
         String[] parts = name.split("");
+        System.out.println(unit.toLowerCase() + "Avatar.png");
         switch (parts[2]) {
+
             case "1":
+
                 lb1.setIcon(Loader.loadImage(unit.toLowerCase() + "Avatar.png"));
+                deck[0] = unit;
                 break;
 
             case "2":
                 lb2.setIcon(Loader.loadImage(unit.toLowerCase() + "Avatar.png"));
-
+                deck[1] = unit;
                 break;
 
             case "3":
                 lb3.setIcon(Loader.loadImage(unit.toLowerCase() + "Avatar.png"));
-
+                deck[2] = unit;
                 break;
 
             case "4":
                 lb4.setIcon(Loader.loadImage(unit.toLowerCase() + "Avatar.png"));
-
+                deck[3] = unit;
                 break;
 
             case "5":
                 lb5.setIcon(Loader.loadImage(unit.toLowerCase() + "Avatar.png"));
-
+                deck[4] = unit;
                 break;
 
             case "6":
                 lb6.setIcon(Loader.loadImage(unit.toLowerCase() + "Avatar.png"));
-
+                deck[5] = unit;
                 break;
 
             case "7":
                 lb7.setIcon(Loader.loadImage(unit.toLowerCase() + "Avatar.png"));
-
+                deck[6] = unit;
                 break;
 
             case "8":
                 lb8.setIcon(Loader.loadImage(unit.toLowerCase() + "Avatar.png"));
-
+                deck[7] = unit;
                 break;
+
+        }
+       pbUnits.setValue(0);
+        for (int i = 0; i < deck.length; i++) {
+            if (deck[i] != null) {
+                switch (deck[i]) {
+                    case "Dame":
+                        pbUnits.setValue(pbUnits.getValue() + 9);
+                        break;
+
+                    case "Bauer":
+                        pbUnits.setValue(pbUnits.getValue() + 1);
+                        break;
+
+                    case "Läufer":
+                        pbUnits.setValue(pbUnits.getValue() + 3);
+                        break;
+
+                    case "Springer":
+                        pbUnits.setValue(pbUnits.getValue() + 3);
+                        break;
+
+                    case "Turm":
+                        pbUnits.setValue(pbUnits.getValue() + 5);
+                        break;
+
+                    case "Agent":
+                        pbUnits.setValue(pbUnits.getValue() + 2);
+                        break;
+                }
+            }
 
         }
         System.out.println(name);
@@ -416,6 +496,7 @@ public class DeckGUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
+    private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -432,5 +513,6 @@ public class DeckGUI extends javax.swing.JFrame {
     private javax.swing.JLabel lb6;
     private javax.swing.JLabel lb7;
     private javax.swing.JLabel lb8;
+    private javax.swing.JProgressBar pbUnits;
     // End of variables declaration//GEN-END:variables
 }

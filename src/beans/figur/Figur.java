@@ -23,6 +23,7 @@ public abstract class Figur {
   private ZugTyp zugtyp;
   private boolean yourSide;
   private String image_name;
+  private int wertung;
 
   public Figur(int zugweite, ZugTyp zugtyp, int x, int y) {
     this(zugweite, zugtyp, new Point(x, y));
